@@ -1,7 +1,13 @@
 import jax.numpy as jnp
 from diff_biophys.geometry import chain_nerf
 
-def rebuild_backbone(init_coords, initial_lengths, initial_angles, initial_dihedrals, delta_phi_psi):
+def rebuild_backbone(
+    init_coords: jnp.ndarray,
+    initial_lengths: jnp.ndarray,
+    initial_angles: jnp.ndarray,
+    initial_dihedrals: jnp.ndarray,
+    delta_phi_psi: jnp.ndarray
+) -> tuple[jnp.ndarray, jnp.ndarray]:
     """
     Rebuild backbone coordinates from initial state and predicted deltas.
     

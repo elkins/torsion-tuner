@@ -11,8 +11,17 @@ RESIDUE_TYPES = [
 ]
 RESIDUE_MAP = {res: i for i, res in enumerate(RESIDUE_TYPES)}
 
-def load_pdb(file_path):
-    """Load a PDB file and extract backbone information."""
+def load_pdb(file_path: str) -> dict:
+    """
+    Load a PDB file and extract backbone information.
+    
+    Args:
+        file_path: Path to the PDB file.
+        
+    Returns:
+        A dictionary containing coordinates, residue indices, elements,
+        and initial geometry parameters.
+    """
     struct = stripeio.load_structure(file_path)
     if isinstance(struct, stripe.AtomArrayStack):
         struct = struct[0]
@@ -23,22 +32,26 @@ def load_pdb(file_path):
     
     res_names = []
     coords = []
+    elements = []
     
     # Iterate through residues
     res_ids = np.unique(backbone.res_id)
     for rid in res_ids:
         res_atoms = backbone[backbone.res_id == rid]
-        # Expect N, CA, C
-        n = res_atoms[res_atoms.atom_name == 'N']
-        ca = res_atoms[res_atoms.atom_name == 'CA']
-        c = res_atoms[res_atoms.atom_name == 'C']
         
-        if len(n) == 1 and len(ca) == 1 and len(c) == 1:
+        # Check if all three backbone atoms are present
+        n_atom = res_atoms[res_atoms.atom_name == 'N']
+        ca_atom = res_atoms[res_atoms.atom_name == 'CA']
+        c_atom = res_atoms[res_atoms.atom_name == 'C']
+        
+        if len(n_atom) == 1 and len(ca_atom) == 1 and len(c_atom) == 1:
+            coords.extend([n_atom.coord[0], ca_atom.coord[0], c_atom.coord[0]])
+            elements.extend([n_atom.element[0], ca_atom.element[0], c_atom.element[0]])
             res_names.append(res_atoms.res_name[0])
-            coords.extend([n.coord[0], ca.coord[0], c.coord[0]])
             
     coords = jnp.array(coords)
     res_indices = jnp.array([RESIDUE_MAP.get(name, 0) for name in res_names])
+    elements = np.array(elements)
     
     # Initial geometry for NeRF
     init_coords = coords[:3]
@@ -49,14 +62,23 @@ def load_pdb(file_path):
     return {
         'coords': coords,
         'res_indices': res_indices,
+        'elements': elements,
         'init_coords': init_coords,
         'lengths': lengths,
         'angles': angles,
         'dihedrals': dihedrals
     }
 
-def get_graph_features(data):
-    """Convert loaded data into graph features."""
+def get_graph_features(data: dict) -> tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
+    """
+    Convert loaded data into graph features.
+    
+    Args:
+        data: The dictionary returned by load_pdb.
+        
+    Returns:
+        A tuple of (node_features, adjacency_matrix, edge_features).
+    """
     res_indices = data['res_indices']
     coords = data['coords']
     n_residues = len(res_indices)
@@ -74,7 +96,10 @@ def get_graph_features(data):
     
     adj = (seq_adj + spatial_adj > 0).astype(jnp.float32)
     
-    return node_features, adj
+    # Edge features: normalized distances
+    edge_features = dist_matrix[:, :, None] / 10.0 # Normalize by cutoff
+    
+    return node_features, adj, edge_features
 
 if __name__ == "__main__":
     import jax

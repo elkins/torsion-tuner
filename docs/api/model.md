@@ -1,0 +1,3 @@
+# Model Module
+
+::: src.model

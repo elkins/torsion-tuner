@@ -1,0 +1,8 @@
+jax
+jaxlib
+equinox
+optax
+biotite
+numpy
+scipy
+-e ./diff-biophys

@@ -1,5 +1,10 @@
 # TorsionTuner: GNN-Based Protein Structure Refinement
 
+![Tests](https://github.com/elkins/TorsionTuner/workflows/Test/badge.svg)
+![Lint](https://github.com/elkins/TorsionTuner/workflows/Lint%20and%20Format/badge.svg)
+![Docs](https://github.com/elkins/TorsionTuner/workflows/Deploy%20Docs/badge.svg)
+![License](https://img.shields.io/github/license/elkins/TorsionTuner)
+
 The **TorsionTuner** is a specialized machine learning tool designed to bridge the gap between "idealized" static protein structures (like those from AlphaFold) and "dynamic" solution-state experimental data (SAXS/NMR). 
 
 By utilizing a JAX-based Graph Neural Network (GNN) and a differentiable kinematics layer, the model applies subtle adjustments to the backbone dihedral angles ($\phi/\psi$) to minimize the discrepancy between the predicted structure and real experimental observables.

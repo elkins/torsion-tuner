@@ -31,11 +31,12 @@ Verify that internal predictors (Chemical Shifts, SAXS) match established gold-s
 ## 🛠 Active Task: Item 1 - NESG "Blind" Benchmark Suite
 *   **Status:** In Progress
 *   **Accomplishments:**
-    *   Successfully implemented the first real-world benchmark for **2KHD** (NESG VC_A0919).
-    *   Demonstrated that TorsionTuner reduces CSRMSD from **0.4304 ppm** (raw AlphaFold) to **0.2873 ppm** against experimental BMRB 16238 data.
-    *   Automated the 2KHD validation in `tests/scientific_benchmarks/test_2khd.py` using the actual AF2 model.
+    *   Successfully implemented real-world benchmarks for **2KHD** (NESG VC_A0919) and **2RN7** (NESG SfR125).
+    *   **2KHD (108 res):** Reduced CSRMSD from **0.4304 ppm** to **0.2873 ppm**.
+    *   **2RN7 (108 res):** Reduced CSRMSD from **7.4319 ppm** to **6.1988 ppm** against experimental BMRB 16110 data.
+    *   Automated the validation suite in `tests/scientific_benchmarks/`.
 *   **Next Steps:**
-    *   Expand to the remaining 8 targets (2KIW, 2KZV, etc.).
+    *   Expand to the remaining 7 targets (2HEQ, 2KBN, 2KIW, 2KJR, 2KOB, 2KZV, 2MA6).
     *   Consolidate benchmark results into a scientific report or dashboard.
 
 ## 🛠 Active Task: Item 2 - Scientific Parity Tests

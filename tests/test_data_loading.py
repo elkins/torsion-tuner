@@ -1,12 +1,14 @@
-from torsiontuner.data import load_pdb, get_graph_features
 import os
+
+from torsiontuner.data import get_graph_features, load_pdb
 
 
 def test_load_pdb():
     # Ensure test_helix.pdb exists
     if not os.path.exists("test_helix.pdb"):
-        from generate_test_pdb import generate_real_helix
         import biotite.structure.io.pdb as pdb
+
+        from generate_test_pdb import generate_real_helix
 
         helix = generate_real_helix()
         pdb_file = pdb.PDBFile()

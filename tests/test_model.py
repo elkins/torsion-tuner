@@ -1,5 +1,6 @@
 import jax.numpy as jnp
 import jax.random as jr
+
 from torsiontuner.model import FineTunerGNN
 
 

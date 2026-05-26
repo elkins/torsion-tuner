@@ -1,6 +1,7 @@
 import jax
 import jax.numpy as jnp
-from diff_biophys.nmr.chemical_shifts import predict_ca_shifts, RANDOM_COIL_CA
+from diff_biophys.nmr.chemical_shifts import RANDOM_COIL_CA, predict_ca_shifts
+
 from torsiontuner.data import RESIDUE_TYPES
 
 # Pre-compute a JAX array for random coil shifts to allow JIT-compatible indexing

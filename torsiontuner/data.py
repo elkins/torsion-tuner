@@ -1,12 +1,12 @@
+import biotite.structure as stripe
+import biotite.structure.io as stripeio
 import jax
 import jax.numpy as jnp
 import numpy as np
-import biotite.structure as stripe
-import biotite.structure.io as stripeio
 from diff_biophys.geometry import (
-    compute_dihedrals,
-    compute_bond_lengths,
     compute_bond_angles,
+    compute_bond_lengths,
+    compute_dihedrals,
 )
 
 RESIDUE_TYPES = [

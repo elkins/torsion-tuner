@@ -1,19 +1,20 @@
+from dataclasses import dataclass
+
+import equinox as eqx
 import jax.numpy as jnp
 import jax.random as jr
 import optax
-import equinox as eqx
-from torsiontuner.model import FineTunerGNN
+from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
+from diff_biophys.saxs import debye_saxs
+
+from torsiontuner.data import RESIDUE_TYPES, get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
+from torsiontuner.model import FineTunerGNN
 from torsiontuner.montelione_utils import (
-    montelione_loss,
     calculate_ansurr_proxy,
     get_residue_rc_shifts,
+    montelione_loss,
 )
-from diff_biophys.saxs import debye_saxs
-from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
-from torsiontuner.data import RESIDUE_TYPES, load_pdb, get_graph_features
-
-from dataclasses import dataclass
 
 
 @dataclass

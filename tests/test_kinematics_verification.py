@@ -1,4 +1,5 @@
 import jax.numpy as jnp
+
 from torsiontuner.data import load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 
@@ -31,8 +32,9 @@ if __name__ == "__main__":
     import os
 
     if not os.path.exists("test_helix.pdb"):
-        from generate_test_pdb import generate_real_helix
         import biotite.structure.io.pdb as pdb
+
+        from generate_test_pdb import generate_real_helix
 
         helix = generate_real_helix()
         pdb_file = pdb.PDBFile()

@@ -4,6 +4,8 @@ check_untyped_defs = true
 
 [tool.ruff]
 line-length = 88
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "N"]
 ignore = ["N806", "N803"] # Allow non-lowercase variables (common in math/physics)
 

@@ -11,9 +11,9 @@ from torsiontuner.data import RESIDUE_TYPES, get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
 from torsiontuner.montelione_utils import (
-    ramachandran_penalty,
     get_residue_rc_shifts,
     montelione_loss,
+    ramachandran_penalty,
 )
 
 

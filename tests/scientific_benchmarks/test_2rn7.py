@@ -10,19 +10,23 @@ from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
 from torsiontuner.data import get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
-from torsiontuner.montelione_utils import ramachandran_penalty, get_residue_rc_shifts
+from torsiontuner.montelione_utils import get_residue_rc_shifts, ramachandran_penalty
 
 
 def test_2rn7_benchmark():
     """
     Scientific Benchmark: 2RN7 (NESG SfR125) — Data Loading & Optimizer Convergence.
 
-    Uses authentic Cα shifts from BMRB 11017 (TnpE protein, Shigella flexneri, 91 residues).
+    Uses authentic Cα shifts from BMRB 11017 (TnpE protein, Shigella flexneri,
+    91 residues).
 
     This test verifies three things:
-      1. The BMRB 11017 shift data loads correctly and aligns to the expected residue range.
-      2. The refinement loop converges (training loss decreases significantly from step 0).
-      3. Refinement does not significantly worsen CSRMSD vs. the AlphaFold starting model.
+      1. The BMRB 11017 shift data loads correctly and aligns to the expected
+         residue range.
+      2. The refinement loop converges (training loss decreases significantly
+         from step 0).
+      3. Refinement does not significantly worsen CSRMSD vs. the AlphaFold
+         starting model.
 
     Note on scope: This test does NOT assert a CSRMSD improvement.
     The simplified Cα shift predictor uses residue-agnostic Gaussian soft-assignment,

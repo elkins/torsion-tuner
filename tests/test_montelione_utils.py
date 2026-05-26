@@ -1,9 +1,9 @@
 import jax.numpy as jnp
 
 from torsiontuner.montelione_utils import (
-    ramachandran_penalty,
     get_residue_rc_shifts,
     montelione_loss,
+    ramachandran_penalty,
 )
 
 

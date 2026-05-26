@@ -14,10 +14,12 @@ Verify that internal predictors (Chemical Shifts, SAXS) match established gold-s
 *   **Goal:** Confirm parity with SPARTA+, ShiftX2, and Crysol.
 *   **Implementation:** Automated tests comparing TorsionTuner outputs with pre-computed outputs from these tools.
 
-### 3. Torsional Regularization & Physics Constraints (Priority: Medium)
-Prove the model preserves chemically valid geometry during refinement.
-*   **Goal:** Ensure the model corrects structural outliers rather than just "fitting the noise."
-*   **Implementation:** Refinement tests on structures with deliberate Ramachandran violations.
+## 🛠 Active Task: Item 3 - Torsional Regularization
+*   **Status:** Completed
+*   **Accomplishments:**
+    *   Developed a rigorous "recovery" benchmark in `tests/scientific_benchmarks/test_regularization.py`.
+    *   Empirically proved that TorsionTuner can restore physical realism to structures with significant Ramachandran violations.
+    *   Demonstrated that the multi-objective loss function (ANSURR proxy + NMR) successfully overcomes random initialization noise to "fix" unphysical starting points.
 
 ### 4. PSVS Integration (Priority: Low)
 Validate the "NMR-quality" of refined models using the Protein Structure Validation Software suite.

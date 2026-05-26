@@ -32,6 +32,7 @@ dev = [
     "black",
     "ruff",
     "mypy",
+    "pandas",
 ]
 docs = [
     "mkdocs",

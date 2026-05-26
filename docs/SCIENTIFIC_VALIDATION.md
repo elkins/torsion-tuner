@@ -24,11 +24,11 @@ Validate the "NMR-quality" of refined models using the Protein Structure Validat
 *   **Goal:** Confirm improvement in Verify3D and Procheck G-factors.
 *   **Implementation:** Export scripts and automated validation report analysis.
 
----
-
-## 🛠 Active Task: Item 1 - NESG 2KHD Benchmark
-*   **Status:** Initiated
+## 🛠 Active Task: Item 2 - Scientific Parity Tests
+*   **Status:** In Progress
+*   **Completed:**
+    *   Analytical parity verification for the Debye SAXS formula.
+    *   CSI (Chemical Shift Index) trend verification for Alpha-helix vs. Beta-strand contexts (matching SPARTA+/ShiftX2 expectations).
 *   **Next Steps:**
-    1.  Create `tests/scientific_benchmarks/` infrastructure.
-    2.  Download/Package BMRB assigned chemical shifts for 2KHD.
-    3.  Develop the automated benchmark comparison script.
+    *   Expand to full-protein SPARTA+ parity using pre-computed outputs.
+    *   Implement RDC (Residual Dipolar Coupling) parity checks.

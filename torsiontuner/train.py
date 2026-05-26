@@ -2,7 +2,6 @@ import jax.numpy as jnp
 import jax.random as jr
 import optax
 import equinox as eqx
-from torsiontuner.data import load_pdb, get_graph_features
 from torsiontuner.model import FineTunerGNN
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.montelione_utils import (
@@ -12,6 +11,7 @@ from torsiontuner.montelione_utils import (
 )
 from diff_biophys.saxs import debye_saxs
 from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
+from torsiontuner.data import RESIDUE_TYPES, load_pdb, get_graph_features
 
 from dataclasses import dataclass
 
@@ -252,6 +252,4 @@ def train(config: Config = Config()):
 
 
 if __name__ == "__main__":
-    from torsiontuner.data import RESIDUE_TYPES  # Needed for PDB saving refactor
-
     train()

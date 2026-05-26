@@ -4,17 +4,6 @@ from torsiontuner.data import get_graph_features, load_pdb
 
 
 def test_load_pdb():
-    # Ensure test_helix.pdb exists
-    if not os.path.exists("test_helix.pdb"):
-        import biotite.structure.io.pdb as pdb
-
-        from generate_test_pdb import generate_real_helix
-
-        helix = generate_real_helix()
-        pdb_file = pdb.PDBFile()
-        pdb_file.set_structure(helix)
-        pdb_file.write("test_helix.pdb")
-
     data = load_pdb("test_helix.pdb")
     assert "coords" in data
     assert "res_indices" in data

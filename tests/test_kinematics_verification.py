@@ -28,17 +28,4 @@ def test_kinematics_reconstruction():
 
 
 if __name__ == "__main__":
-    # Ensure test_helix.pdb exists
-    import os
-
-    if not os.path.exists("test_helix.pdb"):
-        import biotite.structure.io.pdb as pdb
-
-        from generate_test_pdb import generate_real_helix
-
-        helix = generate_real_helix()
-        pdb_file = pdb.PDBFile()
-        pdb_file.set_structure(helix)
-        pdb_file.write("test_helix.pdb")
-
     test_kinematics_reconstruction()

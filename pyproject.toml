@@ -24,6 +24,7 @@ dependencies = [
     "biotite",
     "numpy",
     "diff-biophys",
+    "synth-pdb",
 ]
 
 [project.optional-dependencies]

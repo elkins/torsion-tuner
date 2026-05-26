@@ -41,8 +41,8 @@ pip install -e .
 
 ### 2. Refine a Structure
 ```bash
-# Generate a sample helix
-python generate_test_pdb.py
+# Generate a sample helix using synth-pdb
+synth-pdb --length 20 --conformation alpha --output test_helix.pdb
 
 # Run the refinement pipeline
 python -m torsiontuner.train

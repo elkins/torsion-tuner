@@ -25,10 +25,10 @@ pip install -e ".[docs]"
 To see the model in action, you can run the synthetic helix refinement experiment.
 
 ### Step 1: Generate a Target Structure
-First, generate a synthetic "target" helix that the model will attempt to fit.
+First, generate a synthetic "target" helix using **synth-pdb**.
 
 ```bash
-python generate_test_pdb.py
+synth-pdb --length 20 --conformation alpha --output test_helix.pdb
 ```
 
 ### Step 2: Run Training

@@ -1,4 +1,4 @@
-# TorsionTuner: GNN-Based Protein Structure Refinement
+# 🧬 TorsionTuner: GNN-Based Protein Structure Refinement
 
 ![Tests](https://github.com/elkins/TorsionTuner/workflows/Test/badge.svg)
 ![Lint](https://github.com/elkins/TorsionTuner/workflows/Lint%20and%20Format/badge.svg)
@@ -7,88 +7,77 @@
 
 **Documentation:** [https://elkins.github.io/TorsionTuner/](https://elkins.github.io/TorsionTuner/)
 
-The **TorsionTuner** is a specialized machine learning tool designed to bridge the gap between "idealized" static protein structures (like those from AlphaFold) and "dynamic" solution-state experimental data (SAXS/NMR). 
+---
 
-By utilizing a JAX-based Graph Neural Network (GNN) and a differentiable kinematics layer, the model applies subtle adjustments to the backbone dihedral angles ($\phi/\psi$) to minimize the discrepancy between the predicted structure and real experimental observables.
+## 🌟 Why TorsionTuner?
+
+Static snapshots of proteins (like those from AlphaFold) often miss the subtle "dynamic" nuances of molecules in their natural, solution-state environments. **TorsionTuner** bridges this gap. It is a specialized machine learning engine that "nudges" idealized structures into better agreement with real-world experimental data.
+
+### The Problem
+Traditional refinement often breaks the laws of chemistry—bond lengths stretch, and angles distort—just to fit noisy data.
+
+### The TorsionTuner Solution
+By operating exclusively in **torsional space** ($\phi/\psi$ angles), we ensure the laws of physics are respected. Our differentiable kinematics layer allows gradients to flow from the experimental loss (SAXS/NMR) directly back into the GNN weights, creating a chemically valid, evidence-based refinement.
 
 ---
 
-## 🔬 Theoretical Foundations
+## ✨ Core Features
 
-### 1. The Torsional Prediction Strategy
-Instead of predicting 3D coordinates ($x, y, z$) directly—which can easily break chemical constraints like bond lengths—this model predicts **torsional deltas** ($\Delta\phi, \Delta\psi$). 
-*   **Advantage:** By keeping bond lengths and bond angles fixed to their idealized values, we ensure the resulting structure is always chemically valid.
-*   **Input:** Initial backbone angles from an AlphaFold PDB.
-*   **Output:** Small angular adjustments that "nudge" the protein into a conformation that fits the data.
-
-### 2. Differentiable Kinematics (NeRF)
-To calculate a loss against experimental data, we convert the predicted angles back into 3D coordinates using the **Natural Extension Reference Frame (NeRF)** algorithm, implemented in JAX.
-*   **Forward Pass:** Angles $\rightarrow$ 3D Coordinates $\rightarrow$ Simulated Observables (SAXS/NMR).
-*   **Backward Pass:** Gradients flow from the experimental loss back through the kinematics layer to the GNN weights.
-
-### 3. Multi-Objective Loss Function
-The model optimizes a weighted combination of multiple experimental and structural constraints:
-$$\mathcal{L}_{total} = w_{saxs}\mathcal{L}_{saxs} + w_{nmr}\mathcal{L}_{nmr} + w_{quality}\mathcal{L}_{quality} + w_{reg}\mathcal{L}_{reg}$$
-
-*   **SAXS Loss:** Uses the Debye formula to fit Small-Angle X-ray Scattering profiles.
-*   **NMR Loss:** Fits experimental $C_\alpha$ chemical shifts using a differentiable predictor.
-*   **Quality Loss (ANSURR Proxy):** A soft Ramachandran penalty that ensures $\phi/\psi$ angles remain in favored regions.
-*   **Regularization:** Prevents over-fitting by keeping the angular "nudges" small.
+*   **🛰️ Differentiable Kinematics**: Powered by a JAX-native implementation of the Natural Extension Reference Frame (NeRF) algorithm.
+*   **🧠 Geometric GNN**: An Equinox-based Graph Neural Network that captures both sequential (backbone) and spatial (3D contact) relationships.
+*   **⚖️ Multi-Objective Optimization**: Simultaneously fits SAXS profiles, backbone chemical shifts, and structural quality metrics (ANSURR).
+*   **🧪 Evidence-Based**: Rooted in refinement strategies pioneered by the **Montelione Group**.
 
 ---
 
-## 🛠 Software Architecture
-
-*   **`torsiontuner/data.py`**: PDB loading and graph construction using `Biotite`.
-*   **`torsiontuner/model.py`**: An **Equinox** (JAX-native) GNN with message-passing layers.
-*   **`torsiontuner/kinematics.py`**: The JAX-differentiable bridge between angles and 3D space.
-*   **`torsiontuner/montelione_utils.py`**: Implementation of chemical shift losses and structural quality proxies.
-*   **`torsiontuner/train.py`**: The orchestration layer using **Optax** for optimization.
-
----
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### 1. Installation
 ```bash
-# Clone the repository
 git clone https://github.com/elkins/TorsionTuner.git
 cd TorsionTuner
-
-# Install in editable mode
 pip install -e .
 ```
 
-### 2. Running a Refinement
+### 2. Refine a Structure
 ```bash
-# 1. Generate a synthetic "target" helix
+# Generate a sample helix
 python generate_test_pdb.py
 
-# 2. Run the multi-objective fine-tuning optimization
+# Run the refinement pipeline
 python -m torsiontuner.train
 ```
 
 ---
 
-## 🏛 Research Integration (The Montelione Group Approach)
-This project implements refinement strategies pioneered by the **Montelione Group** (RPI/Rutgers) for integrating AI-predicted structures with NMR data.
+## 🛠 Software Architecture
 
-### 1. Chemical Shift Driven Refinement
-Research shows that AlphaFold models often rival the accuracy of experimental NMR structures but can be further improved by fitting to backbone chemical shifts.
-*   **Implementation:** We use differentiable $C_\alpha$ shift prediction to "nudge" models towards experimental accuracy.
-*   **Reference:** *Tejero R, et al. (2022). "AlphaFold models of small proteins rival the accuracy of solution NMR structures." Frontiers in Molecular Biosciences.*
+The project is structured for transparency and modularity:
 
-### 2. Validation with RPF-DP and ANSURR
-The Montelione lab advocates for rigorous validation of refined models using "goodness-of-fit" metrics.
-*   **RPF-DP:** Measures how well the 3D model fits unassigned NOESY peak lists (Recall, Precision, F-measure, and Discrimination Power).
-*   **ANSURR:** Validates accuracy by comparing flexibility predicted from chemical shifts (RCI) with flexibility from the 3D structure.
-*   **Reference:** *Huang YJ, et al. (2012). "RPF: a quality assessment tool for protein NMR structures." Nucleic Acids Research.*
-*   **Reference:** *Fowler NJ, et al. (2020). "A method for validating the accuracy of NMR protein structures." Nature Communications.*
+*   **`torsiontuner/data.py`**: PDB loading and graph construction.
+*   **`torsiontuner/model.py`**: The GNN architecture and message-passing layers.
+*   **`torsiontuner/kinematics.py`**: The differentiable bridge between angles and 3D space.
+*   **`torsiontuner/montelione_utils.py`**: Chemical shift losses and quality proxies.
+*   **`torsiontuner/train.py`**: The training orchestration and optimization loop.
 
-### 3. PSVS Suite
-Refined structures should be validated using the **Protein Structure Validation Software (PSVS)** suite.
-*   **Utility:** Confirms that the refinement has improved the "NMR-quality" of the prediction.
-*   **Link:** [PSVS Server](http://psvs-1_5.nesg.org/)
+---
+
+## 🏛 Research Integration
+
+This project implements refinement strategies for integrating AI-predicted structures with NMR data.
+
+*   **Chemical Shift Driven Refinement:** Using $C_\alpha$ shift prediction to improve AlphaFold model accuracy.
+*   **Scientific Validation:** Rigorous benchmarking against the **NESG "Blind" Dataset**. See our [Scientific Validation Roadmap](docs/SCIENTIFIC_VALIDATION.md) for more details.
+
+---
+
+## 📚 Glossary
+
+*   **Dihedral Angles ($\phi, \psi$):** The rotation angles of the protein backbone that define its overall 3D fold.
+*   **NeRF (Natural Extension Reference Frame):** An algorithm used to convert internal coordinates (angles/lengths) into 3D Cartesian coordinates.
+*   **CSRMSD:** Chemical Shift Root-Mean-Square Deviation—a measure of how well a structure fits experimental NMR data.
+*   **ANSURR:** A validation method that ensures the accuracy and precision of NMR structures by comparing flexibility measures.
+*   **SAXS (Small-Angle X-ray Scattering):** A technique that provides information on the overall shape, size, and dynamics of proteins in solution.
 
 ---
 
@@ -97,6 +86,14 @@ Refined structures should be validated using the **Protein Structure Validation 
 *   **Rosetta Refinement:** Mao, B., et al. (2014). *J. Am. Chem. Soc.*, 136(5), 1893–1906.
 *   **AlphaFold-NMR Assessment:** Li, E. H., et al. (2023). *J. Magn. Reson.*, 352, 107481.
 *   **Debye Formula for SAXS:** Debye, P. (1915). *Annalen der Physik*, 351(6), 809-876.
+
+---
+
+## 🤝 Contributing & Support
+
+We welcome contributions from both the Machine Learning and Structural Biology communities! 
+*   **Bugs/Features:** Please open an issue.
+*   **Questions:** Visit our [Documentation](https://elkins.github.io/TorsionTuner/) or reach out via GitHub Discussions.
 
 ---
 

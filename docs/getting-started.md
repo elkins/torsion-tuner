@@ -3,7 +3,7 @@
 ## 1. Installation
 
 ### From Source
-Clone the repository and install in editable mode with the necessary dependencies:
+Clone the repository and install in editable mode:
 
 ```bash
 git clone https://github.com/elkins/TorsionTuner.git

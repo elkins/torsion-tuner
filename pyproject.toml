@@ -14,6 +14,7 @@ dependencies = [
     "equinox",
     "biotite",
     "numpy",
+    "diff-biophys",
 ]
 
 [project.optional-dependencies]

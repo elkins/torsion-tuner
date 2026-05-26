@@ -25,7 +25,7 @@ By operating exclusively in **torsional space** ($\phi/\psi$ angles), we ensure 
 
 *   **🛰️ Differentiable Kinematics**: Powered by a JAX-native implementation of the Natural Extension Reference Frame (NeRF) algorithm.
 *   **🧠 Geometric GNN**: An Equinox-based Graph Neural Network that captures both sequential (backbone) and spatial (3D contact) relationships.
-*   **⚖️ Multi-Objective Optimization**: Simultaneously fits SAXS profiles, backbone chemical shifts, and structural quality metrics (ANSURR).
+*   **⚖️ Multi-Objective Optimization**: Simultaneously fits SAXS profiles, backbone chemical shifts, and structural geometry (Ramachandran regularization).
 *   **🧪 Evidence-Based**: Rooted in refinement strategies pioneered by the **Montelione Group**.
 
 ---
@@ -76,7 +76,7 @@ This project implements refinement strategies for integrating AI-predicted struc
 *   **Dihedral Angles ($\phi, \psi$):** The rotation angles of the protein backbone that define its overall 3D fold.
 *   **NeRF (Natural Extension Reference Frame):** An algorithm used to convert internal coordinates (angles/lengths) into 3D Cartesian coordinates.
 *   **CSRMSD:** Chemical Shift Root-Mean-Square Deviation—a measure of how well a structure fits experimental NMR data.
-*   **ANSURR:** A validation method that ensures the accuracy and precision of NMR structures by comparing flexibility measures.
+*   **Ramachandran Regularization:** A soft potential penalizing phi/psi values outside the favored backbone geometry regions (alpha-helix, beta-strand, left-handed alpha). Used as a training-time regularizer; analogous to the Ramachandran terms in CNS and Rosetta. For post-refinement backbone quality assessment, see PROCHECK or MolProbity. For NMR-specific structure accuracy validation, see ANSURR (Fowler et al. 2020, *Nature Commun.*).
 *   **SAXS (Small-Angle X-ray Scattering):** A technique that provides information on the overall shape, size, and dynamics of proteins in solution.
 
 ---

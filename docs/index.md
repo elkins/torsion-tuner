@@ -10,7 +10,7 @@ By utilizing a JAX-based Graph Neural Network (GNN) and a differentiable kinemat
 
 *   **Torsional Prediction Strategy**: Predicts $\Delta\phi/\Delta\psi$ to maintain chemical constraints.
 *   **Differentiable Kinematics**: Natural Extension Reference Frame (NeRF) implemented in JAX.
-*   **Multi-Objective Loss**: Integrates SAXS, NMR, and structural quality (ANSURR).
+*   **Multi-Objective Loss**: Integrates SAXS, NMR, and Ramachandran geometry regularization.
 *   **GNN-Based**: Captures spatial and sequential relationships via an Equinox-based GNN.
 
 ---

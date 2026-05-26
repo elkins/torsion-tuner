@@ -10,14 +10,14 @@ from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
 from torsiontuner.data import get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
-from torsiontuner.montelione_utils import calculate_ansurr_proxy, get_residue_rc_shifts
+from torsiontuner.montelione_utils import ramachandran_penalty, get_residue_rc_shifts
 
 
 def test_2rn7_benchmark():
     """
     Scientific Benchmark: 2RN7 (NESG SfR125).
-    Verify that refinement reduces CSRMSD against experimental BMRB 16110 data.
-    This target is a 108-residue TnpE protein (IS629 orfA).
+    Verify that refinement reduces CSRMSD against experimental BMRB 11017 data.
+    This target is a 108-residue TnpE protein (IS629 orfA) from Shigella flexneri.
     """
     data_dir = os.path.join(os.path.dirname(__file__), "data", "2rn7")
     shift_data = pd.read_csv(os.path.join(data_dir, "shifts.csv"))
@@ -107,7 +107,7 @@ def test_2rn7_benchmark():
         matched_preds = pred_shifts_all[final_mapped]
         cs_loss = jnp.mean((matched_preds - final_targets) ** 2)
 
-        ansurr_loss = calculate_ansurr_proxy(pred_phi, pred_psi)
+        ansurr_loss = ramachandran_penalty(pred_phi, pred_psi)
         reg_loss = jnp.mean(deltas**2)
 
         return 1.0 * cs_loss + 0.1 * ansurr_loss + 0.01 * reg_loss

@@ -8,7 +8,7 @@ from torsiontuner.data import get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
 from torsiontuner.montelione_utils import (
-    calculate_ansurr_proxy,
+    ramachandran_penalty,
     get_residue_rc_shifts,
     montelione_loss,
 )
@@ -18,7 +18,7 @@ def test_torsional_regularization_recovery():
     """
     Scientific Validation (Item 3): Torsional Regularization.
     Prove that the model can recover from unphysical 'mangled' geometry
-    by minimizing the ANSURR proxy penalty and experimental loss.
+    by minimizing the Ramachandran penalty and experimental loss.
     """
     # 1. Load ground truth structure
     data = load_pdb("test_helix.pdb")
@@ -46,10 +46,10 @@ def test_torsional_regularization_recovery():
         if phi_idx >= 0 and phi_idx < len(mangled_dihedrals):
             mangled_dihedrals = mangled_dihedrals.at[phi_idx].set(0.0)
 
-    # Initial ANSURR penalty for mangled structure
+    # Initial Ramachandran penalty for mangled structure
     mangled_phi = mangled_dihedrals[2::3]
     mangled_psi = mangled_dihedrals[0::3]
-    initial_penalty = calculate_ansurr_proxy(mangled_phi, mangled_psi)
+    initial_penalty = ramachandran_penalty(mangled_phi, mangled_psi)
 
     # 4. Initialize Model
     key = jr.PRNGKey(42)
@@ -72,12 +72,12 @@ def test_torsional_regularization_recovery():
         pred_phi = updated_dihedrals[2::3]
         pred_psi = updated_dihedrals[0::3]
 
-        # Heavy weight on ANSURR to force physical recovery
+        # Heavy weight on Ramachandran penalty to force physical recovery
         nmr_loss = montelione_loss(pred_phi, pred_psi, target_shifts, res_indices[1:])
-        ansurr_loss = calculate_ansurr_proxy(pred_phi, pred_psi)
+        rama_loss = ramachandran_penalty(pred_phi, pred_psi)
         reg_loss = jnp.mean(deltas**2)
 
-        return 0.1 * nmr_loss + 10.0 * ansurr_loss + 0.001 * reg_loss
+        return 0.1 * nmr_loss + 10.0 * rama_loss + 0.001 * reg_loss
 
     @eqx.filter_jit
     def make_step(model, opt_state):
@@ -87,7 +87,7 @@ def test_torsional_regularization_recovery():
         return model, opt_state, loss
 
     # 6. Run Refinement
-    print(f"Initial ANSURR Penalty: {initial_penalty:.6f}")
+    print(f"Initial Rama Penalty: {initial_penalty:.6f}")
     for step in range(1001):
         model, opt_state, loss = make_step(model, opt_state)
         if step % 200 == 0:
@@ -102,9 +102,9 @@ def test_torsional_regularization_recovery():
             )
             final_phi = final_dihedrals[2::3]
             final_psi = final_dihedrals[0::3]
-            current_penalty = calculate_ansurr_proxy(final_phi, final_psi)
+            current_penalty = ramachandran_penalty(final_phi, final_psi)
             print(
-                f"Step {step}, Loss: {loss:.6f}, ANSURR Penalty: {current_penalty:.6f}"
+                f"Step {step}, Loss: {loss:.6f}, Rama Penalty: {current_penalty:.6f}"
             )
 
     # 7. Validation
@@ -118,9 +118,9 @@ def test_torsional_regularization_recovery():
     )
     final_phi = final_dihedrals[2::3]
     final_psi = final_dihedrals[0::3]
-    final_penalty = calculate_ansurr_proxy(final_phi, final_psi)
+    final_penalty = ramachandran_penalty(final_phi, final_psi)
 
-    print(f"Final ANSURR Penalty: {final_penalty:.6f}")
+    print(f"Final Rama Penalty: {final_penalty:.6f}")
 
     # Recovery Criterion: Penalty should decrease significantly
     assert (

@@ -1,7 +1,7 @@
 import jax.numpy as jnp
 
 from torsiontuner.montelione_utils import (
-    calculate_ansurr_proxy,
+    ramachandran_penalty,
     get_residue_rc_shifts,
     montelione_loss,
 )
@@ -26,16 +26,16 @@ def test_montelione_loss():
     assert not jnp.isnan(loss)
 
 
-def test_calculate_ansurr_proxy():
+def test_ramachandran_penalty():
     n_res = 5
     phi = jnp.array([-1.05] * n_res)  # Near Alpha region
     psi = jnp.array([-0.78] * n_res)
 
-    loss_favorable = calculate_ansurr_proxy(phi, psi)
+    loss_favorable = ramachandran_penalty(phi, psi)
 
     phi_bad = jnp.array([1.0] * n_res)  # Typically unfavorable
     psi_bad = jnp.array([1.0] * n_res)
-    loss_unfavorable = calculate_ansurr_proxy(phi_bad, psi_bad)
+    loss_unfavorable = ramachandran_penalty(phi_bad, psi_bad)
 
     # Lower is better in this proxy implementation (penalty)
     assert loss_favorable < loss_unfavorable

@@ -11,7 +11,7 @@ from torsiontuner.data import RESIDUE_TYPES, get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
 from torsiontuner.montelione_utils import (
-    calculate_ansurr_proxy,
+    ramachandran_penalty,
     get_residue_rc_shifts,
     montelione_loss,
 )
@@ -29,7 +29,7 @@ class Config:
         n_layers: Number of GNN layers.
         w_saxs: Weight for the SAXS loss term.
         w_nmr: Weight for the NMR (chemical shift) loss term.
-        w_ansurr: Weight for the structural quality (ANSURR proxy) loss term.
+        w_rama: Weight for the Ramachandran geometry regularization term.
         w_reg: Weight for the regularization loss term.
     """
 
@@ -39,7 +39,7 @@ class Config:
     n_layers: int = 3
     w_saxs: float = 1.0
     w_nmr: float = 0.1
-    w_ansurr: float = 0.05
+    w_rama: float = 0.05
     w_reg: float = 0.01
     saxs_q_min: float = 0.01
     saxs_q_max: float = 0.5
@@ -135,8 +135,8 @@ def train(config: Config = Config()):
         pred_psi = updated_dihedrals[0::3]
         nmr_loss = montelione_loss(pred_phi, pred_psi, target_shifts, res_indices[1:])
 
-        # Quality Loss (ANSURR Proxy)
-        ansurr_loss = calculate_ansurr_proxy(pred_phi, pred_psi)
+        # Ramachandran geometry regularization
+        rama_loss = ramachandran_penalty(pred_phi, pred_psi)
 
         # Regularization: keep deltas small
         reg_loss = jnp.mean(deltas**2)
@@ -144,7 +144,7 @@ def train(config: Config = Config()):
         total_loss = (
             config.w_saxs * saxs_loss
             + config.w_nmr * nmr_loss
-            + config.w_ansurr * ansurr_loss
+            + config.w_rama * rama_loss
             + config.w_reg * reg_loss
         )
         return total_loss

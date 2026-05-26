@@ -11,7 +11,7 @@ from torsiontuner.data import get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
 from torsiontuner.montelione_utils import (
-    calculate_ansurr_proxy,
+    ramachandran_penalty,
     get_residue_rc_shifts,
 )
 
@@ -89,7 +89,7 @@ def test_2khd_benchmark():
         cs_loss = jnp.mean((pred_shifts_subset - target_shifts) ** 2)
 
         # Structural regularity and small deltas
-        ansurr_loss = calculate_ansurr_proxy(pred_phi, pred_psi)
+        ansurr_loss = ramachandran_penalty(pred_phi, pred_psi)
         reg_loss = jnp.mean(deltas**2)
 
         return 1.0 * cs_loss + 0.1 * ansurr_loss + 0.01 * reg_loss

@@ -19,7 +19,7 @@ Verify that internal predictors (Chemical Shifts, SAXS) match established gold-s
 *   **Accomplishments:**
     *   Developed a rigorous "recovery" benchmark in `tests/scientific_benchmarks/test_regularization.py`.
     *   Empirically proved that TorsionTuner can restore physical realism to structures with significant Ramachandran violations.
-    *   Demonstrated that the multi-objective loss function (ANSURR proxy + NMR) successfully overcomes random initialization noise to "fix" unphysical starting points.
+    *   Demonstrated that the multi-objective loss function (Ramachandran regularization + NMR) successfully overcomes random initialization noise to "fix" unphysical starting points.
 
 ## 🛠 Active Task: Item 4 - PSVS Integration
 *   **Status:** Completed
@@ -33,7 +33,7 @@ Verify that internal predictors (Chemical Shifts, SAXS) match established gold-s
 *   **Accomplishments:**
     *   Successfully implemented real-world benchmarks for **2KHD** (NESG VC_A0919) and **2RN7** (NESG SfR125).
     *   **2KHD (108 res):** Reduced CSRMSD from **0.4304 ppm** to **0.2873 ppm**.
-    *   **2RN7 (108 res):** Reduced CSRMSD from **7.4319 ppm** to **6.1988 ppm** against experimental BMRB 16110 data.
+    *   **2RN7 (108 res):** Reduced CSRMSD from **7.4319 ppm** to **6.1988 ppm** against experimental BMRB 11017 data.
     *   Automated the validation suite in `tests/scientific_benchmarks/`.
 *   **Next Steps:**
     *   Expand to the remaining 7 targets (2HEQ, 2KBN, 2KIW, 2KJR, 2KOB, 2KZV, 2MA6).

@@ -3,7 +3,6 @@ import jax.numpy as jnp
 import jax.random as jr
 import optax
 from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
-from diff_biophys.saxs import debye_saxs
 
 from torsiontuner.data import get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone

@@ -1,21 +1,19 @@
 import os
 
 import equinox as eqx
-import jax
 import jax.numpy as jnp
 import jax.random as jr
 import optax
 import pandas as pd
 from diff_biophys.nmr.chemical_shifts import predict_ca_shifts
+
 from torsiontuner.data import get_graph_features, load_pdb
 from torsiontuner.kinematics import rebuild_backbone
 from torsiontuner.model import FineTunerGNN
 from torsiontuner.montelione_utils import (
     calculate_ansurr_proxy,
     get_residue_rc_shifts,
-    montelione_loss,
 )
-from torsiontuner.train import Config, train
 
 
 def calculate_cs_rmsd(phi, psi, target_shifts, res_indices):
@@ -66,9 +64,7 @@ def test_2khd_benchmark():
 
     # 3. Initialize Model and Optimizer
     key = jr.PRNGKey(42)
-    model = FineTunerGNN(
-        node_dim=20, hidden_dim=64, out_dim=2, n_layers=3, key=key
-    )
+    model = FineTunerGNN(node_dim=20, hidden_dim=64, out_dim=2, n_layers=3, key=key)
     optimizer = optax.adamw(learning_rate=1e-3)
     opt_state = optimizer.init(eqx.filter(model, eqx.is_array))
 

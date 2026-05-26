@@ -886,8 +886,8 @@
 <h2 id="2-running-a-refinement">2. Running a Refinement</h2>
 <p>To see the model in action, you can run the synthetic helix refinement experiment.</p>
 <h3 id="step-1-generate-a-target-structure">Step 1: Generate a Target Structure</h3>
-<p>First, generate a synthetic "target" helix that the model will attempt to fit.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>generate_test_pdb.py
+<p>First, generate a synthetic "target" helix using <strong>synth-pdb</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>synth-pdb<span class="w"> </span>--length<span class="w"> </span><span class="m">20</span><span class="w"> </span>--conformation<span class="w"> </span>alpha<span class="w"> </span>--output<span class="w"> </span>test_helix.pdb
 </code></pre></div>
 <h3 id="step-2-run-training">Step 2: Run Training</h3>
 <p>Run the multi-objective fine-tuning optimization. This script will load the helix, simulate SAXS/NMR data, and train the GNN to refine the structure.</p>

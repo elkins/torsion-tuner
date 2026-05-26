@@ -655,16 +655,22 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#3-torsional-regularization-physics-constraints-priority-medium" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#active-task-item-3-torsional-regularization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Torsional Regularization &amp; Physics Constraints (Priority: Medium)
+        🛠 Active Task: Item 3 - Torsional Regularization
       
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="🛠 Active Task: Item 3 - Torsional Regularization">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#4-psvs-integration-priority-low" class="md-nav__link">
@@ -721,10 +727,16 @@
 <p>Verify that internal predictors (Chemical Shifts, SAXS) match established gold-standard software.
 *   <strong>Goal:</strong> Confirm parity with SPARTA+, ShiftX2, and Crysol.
 *   <strong>Implementation:</strong> Automated tests comparing TorsionTuner outputs with pre-computed outputs from these tools.</p>
-<h3 id="3-torsional-regularization-physics-constraints-priority-medium">3. Torsional Regularization &amp; Physics Constraints (Priority: Medium)</h3>
-<p>Prove the model preserves chemically valid geometry during refinement.
-*   <strong>Goal:</strong> Ensure the model corrects structural outliers rather than just "fitting the noise."
-*   <strong>Implementation:</strong> Refinement tests on structures with deliberate Ramachandran violations.</p>
+<h2 id="active-task-item-3-torsional-regularization">🛠 Active Task: Item 3 - Torsional Regularization</h2>
+<ul>
+<li><strong>Status:</strong> Completed</li>
+<li><strong>Accomplishments:</strong><ul>
+<li>Developed a rigorous "recovery" benchmark in <code>tests/scientific_benchmarks/test_regularization.py</code>.</li>
+<li>Empirically proved that TorsionTuner can restore physical realism to structures with significant Ramachandran violations.</li>
+<li>Demonstrated that the multi-objective loss function (ANSURR proxy + NMR) successfully overcomes random initialization noise to "fix" unphysical starting points.</li>
+</ul>
+</li>
+</ul>
 <h3 id="4-psvs-integration-priority-low">4. PSVS Integration (Priority: Low)</h3>
 <p>Validate the "NMR-quality" of refined models using the Protein Structure Validation Software suite.
 *   <strong>Goal:</strong> Confirm improvement in Verify3D and Procheck G-factors.

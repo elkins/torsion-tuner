@@ -3,7 +3,7 @@
 ![Tests](https://github.com/elkins/TorsionTuner/workflows/Test/badge.svg)
 ![Lint](https://github.com/elkins/TorsionTuner/workflows/Lint%20and%20Format/badge.svg)
 ![Docs](https://github.com/elkins/TorsionTuner/workflows/Deploy%20Docs/badge.svg)
-![License](https://img.shields.io/github/license/elkins/TorsionTuner)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Documentation:** [https://elkins.github.io/TorsionTuner/](https://elkins.github.io/TorsionTuner/)
 

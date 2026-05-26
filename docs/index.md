@@ -15,6 +15,29 @@ By utilizing a JAX-based Graph Neural Network (GNN) and a differentiable kinemat
 
 ---
 
+## 🧪 Scientific Validation
+
+TorsionTuner is validated at three levels:
+
+1. **Internal parity** — physics engines (CS predictor, Debye SAXS) verified against independent implementations
+2. **NESG benchmark** — Cα CSRMSD reduction on NESG targets using authentic BMRB experimental shifts
+3. **External quality** — structural quality tracked via MolProbity, PSVS, and ANSURR (planned)
+
+**Current benchmark results:**
+
+| Target | BMRB | Residues | Initial CSRMSD | Final CSRMSD | Δ |
+|--------|------|----------|----------------|--------------|---|
+| 2KHD (α-helical) | 16238 | 17 | 0.430 ppm | 0.287 ppm | −33% |
+| 2RN7 (mixed α/β) | 11017 | 91 | 1.819 ppm | — | see note¹ |
+
+> ¹ 2RN7's CSRMSD improvement is limited by the residue-agnostic CS predictor floor (~1.8 ppm);
+> see the roadmap for details.
+
+For the full validation plan, benchmark methodology, and status of each item see
+**[docs/VALIDATION_ROADMAP.md](VALIDATION_ROADMAP.md)**.
+
+---
+
 ## 📖 Key References
 *   **RPF Scores:** Huang, Y. J., et al. (2005). *J. Am. Chem. Soc.*, 127(5), 1665–1674.
 *   **Rosetta Refinement:** Mao, B., et al. (2014). *J. Am. Chem. Soc.*, 136(5), 1893–1906.

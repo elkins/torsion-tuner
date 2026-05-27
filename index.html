@@ -397,6 +397,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scientific-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Scientific Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#key-references" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -706,6 +717,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scientific-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Scientific Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#key-references" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -744,6 +766,51 @@
 <li><strong>Multi-Objective Loss</strong>: Integrates SAXS, NMR, and Ramachandran geometry regularization.</li>
 <li><strong>GNN-Based</strong>: Captures spatial and sequential relationships via an Equinox-based GNN.</li>
 </ul>
+<hr />
+<h2 id="scientific-validation">🧪 Scientific Validation</h2>
+<p>TorsionTuner is validated at three levels:</p>
+<ol>
+<li><strong>Internal parity</strong> — physics engines (CS predictor, Debye SAXS) verified against independent implementations</li>
+<li><strong>NESG benchmark</strong> — Cα CSRMSD reduction on NESG targets using authentic BMRB experimental shifts</li>
+<li><strong>External quality</strong> — structural quality tracked via MolProbity, PSVS, and ANSURR (planned)</li>
+</ol>
+<p><strong>Current benchmark results:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>BMRB</th>
+<th>Residues</th>
+<th>Initial CSRMSD</th>
+<th>Final CSRMSD</th>
+<th>Δ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2KHD (α-helical)</td>
+<td>16238</td>
+<td>17</td>
+<td>0.430 ppm</td>
+<td>0.287 ppm</td>
+<td>−33%</td>
+</tr>
+<tr>
+<td>2RN7 (mixed α/β)</td>
+<td>11017</td>
+<td>91</td>
+<td>1.819 ppm</td>
+<td>—</td>
+<td>see note¹</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>¹ 2RN7's CSRMSD improvement is limited by the residue-agnostic CS predictor floor (~1.8 ppm);
+see the roadmap for details.</p>
+</blockquote>
+<p>For the full validation plan, benchmark methodology, and status of each item see
+<strong><a href="VALIDATION_ROADMAP/">docs/VALIDATION_ROADMAP.md</a></strong>.</p>
 <hr />
 <h2 id="key-references">📖 Key References</h2>
 <ul>

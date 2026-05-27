@@ -67,7 +67,9 @@ class FineTunerGNN(eqx.Module):
     layers: list
     output_head: eqx.nn.Linear
 
-    def __init__(self, node_dim: int, hidden_dim: int, out_dim: int, n_layers: int, key: jnp.ndarray) -> None:
+    def __init__(
+        self, node_dim: int, hidden_dim: int, out_dim: int, n_layers: int, key: jnp.ndarray
+    ) -> None:
         keys = jr.split(key, n_layers + 1)
         self.layers = []
         curr_dim = node_dim

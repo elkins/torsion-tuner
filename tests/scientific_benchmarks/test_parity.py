@@ -73,9 +73,7 @@ def _synth_nmr_ca(pdb_path: str) -> dict[int, float]:
 
     chain = next(iter(raw))  # usually 'A'
     return {
-        int(res_id): float(atoms["CA"])
-        for res_id, atoms in raw[chain].items()
-        if "CA" in atoms
+        int(res_id): float(atoms["CA"]) for res_id, atoms in raw[chain].items() if "CA" in atoms
     }
 
 
@@ -164,15 +162,9 @@ def test_ca_shift_parity():
 
     # Parity check: Helix should be downfield (larger ppm) than Beta
     # and Helix should be (+) relative to RC, Beta should be (-) relative to RC.
-    assert (
-        shifts_helix[0] > rc_shifts[0]
-    ), "Helix shift should be (+) relative to random coil"
-    assert (
-        shifts_beta[0] < rc_shifts[1]
-    ), "Beta shift should be (-) relative to random coil"
-    assert (
-        shifts_helix[0] > shifts_beta[0]
-    ), "Helix shift should be more positive than Beta"
+    assert shifts_helix[0] > rc_shifts[0], "Helix shift should be (+) relative to random coil"
+    assert shifts_beta[0] < rc_shifts[1], "Beta shift should be (-) relative to random coil"
+    assert shifts_helix[0] > shifts_beta[0], "Helix shift should be more positive than Beta"
 
 
 def test_saxs_debye_parity():

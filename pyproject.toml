@@ -1,13 +1,90 @@
 [tool.mypy]
-ignore_missing_imports = true
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
 check_untyped_defs = true
+strict_equality = true
+exclude = ["build/", "dist/", "scratch/", "site/"]
+
+[[tool.mypy.overrides]]
+module = ["tests.*", "scripts.*", "examples.*"]
+disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = [
+    "jax.*",
+    "jaxlib.*",
+    "optax.*",
+    "equinox.*",
+    "numpy.*",
+    "biotite.*",
+    "pandas.*",
+    "diff_biophys.*",
+    "synth_pdb.*",
+    "synth_nmr.*",
+]
+ignore_missing_imports = true
 
 [tool.ruff]
-line-length = 88
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "N"]
-ignore = ["N806", "N803"] # Allow non-lowercase variables (common in math/physics)
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+ignore = [
+    "E501",  # line length handled by formatter
+    "N806",  # uppercase variables in functions (scientific constants: Da, R, S2)
+    "N803",  # uppercase arguments (common in biophysics)
+    "N802",  # uppercase function names (physics convention)
+    "B017",  # asserting on Exception (acceptable in generic error tests)
+    "B904",  # raise from (not yet fixed project-wide)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # re-exports are intentional
+"tests/*" = ["N", "B"]   # naming/bugbear not enforced in tests
+
+[tool.ruff.lint.isort]
+known-first-party = ["torsiontuner"]
+
+# ── Test runner ───────────────────────────────────────────────────────────────
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+# ── Coverage ──────────────────────────────────────────────────────────────────
+[tool.coverage.run]
+source = ["."]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
 
 
 [project]

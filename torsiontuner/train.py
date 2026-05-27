@@ -46,8 +46,10 @@ class Config:
     saxs_q_points: int = 50
 
 
-def train(config: Config = Config()):
+def train(config: Config | None = None):
     """
+    config = config if config is not None else Config()
+
     Execute the structural refinement training loop.
 
     This function loads a starting PDB, simulates experimental data (SAXS and NMR),
@@ -227,7 +229,7 @@ def train(config: Config = Config()):
     atoms = []
     res_indices = data["res_indices"]
     # We need to map residue indices back to names for the PDB
-    idx_to_res = {i: name for i, name in enumerate(RESIDUE_TYPES)}
+    idx_to_res = {i: name for i, name in enumerate(RESIDUE_TYPES)}  # noqa: C416
 
     for i in range(len(res_indices)):
         res_name = idx_to_res.get(int(res_indices[i]), "ALA")

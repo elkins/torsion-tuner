@@ -1,9 +1,9 @@
 # 🧬 TorsionTuner: GNN-Based Protein Structure Refinement
 
-![Tests](https://github.com/elkins/TorsionTuner/workflows/Test/badge.svg)
-![Lint](https://github.com/elkins/TorsionTuner/workflows/Lint%20and%20Format/badge.svg)
-![Docs](https://github.com/elkins/TorsionTuner/workflows/Deploy%20Docs/badge.svg)
+[![Tests](https://github.com/elkins/TorsionTuner/actions/workflows/test.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Checked with mypy](https://img.shields.io/badge/type%20checked-mypy-blue)](https://mypy-lang.org/)
 
 **Documentation:** [https://elkins.github.io/TorsionTuner/](https://elkins.github.io/TorsionTuner/)
 
@@ -99,3 +99,29 @@ We welcome contributions from both the Machine Learning and Structural Biology c
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🔗 Related Projects
+
+TorsionTuner depends on and integrates with:
+
+- [diff-biophys](https://github.com/elkins/diff-biophys) — JAX differentiable kernels for SAXS and NMR losses
+- [synth-pdb](https://github.com/elkins/synth-pdb) — Synthetic PDB generation for training and validation
+- [synth-nmr](https://github.com/elkins/synth-nmr) — Chemical shift prediction and NMR observables
+- [synth-saxs](https://github.com/elkins/synth-saxs) — SAXS profile simulation for loss computation
+- [diff-ensemble](https://github.com/elkins/diff-ensemble) — Ensemble-level counterpart using a VAE architecture
+
+---
+
+## 📖 Citation
+
+```bibtex
+@software{torsiontuner,
+  author  = {Elkins, George},
+  title   = {TorsionTuner: GNN-based protein structure refinement in torsional space},
+  year    = {2024},
+  url     = {https://github.com/elkins/TorsionTuner},
+  version = {0.1.0}
+}
+```

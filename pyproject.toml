@@ -92,7 +92,17 @@ name = "torsiontuner"
 version = "0.1.0"
 description = "GNN-based protein structure refinement via differentiable torsions"
 authors = [{name = "George Elkins"}]
-license = {text = "MIT"}
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Physics",
+]
 dependencies = [
     "jax",
     "jaxlib",

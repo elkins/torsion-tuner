@@ -73,9 +73,7 @@ def _synth_nmr_ca(pdb_path: str) -> dict[int, float]:
 
     chain = next(iter(raw))  # usually 'A'
     return {
-        int(res_id): float(atoms["CA"])
-        for res_id, atoms in raw[chain].items()
-        if "CA" in atoms
+        int(res_id): float(atoms["CA"]) for res_id, atoms in raw[chain].items() if "CA" in atoms
     }
 
 
@@ -105,9 +103,7 @@ def _compare(
     Prints a human-readable summary and returns the metric dict.
     """
     common = sorted(set(bmrb) & set(sn_ca) & set(tt_ca))
-    assert (
-        common
-    ), f"{label}: no residues in common between BMRB, synth-nmr, and TorsionTuner"
+    assert common, f"{label}: no residues in common between BMRB, synth-nmr, and TorsionTuner"
 
     exp = np.array([bmrb[r] for r in common])
     sn = np.array([sn_ca[r] for r in common])
@@ -163,15 +159,9 @@ def test_ca_shift_parity():
 
     # Parity check: Helix should be downfield (larger ppm) than Beta
     # and Helix should be (+) relative to RC, Beta should be (-) relative to RC.
-    assert (
-        shifts_helix[0] > rc_shifts[0]
-    ), "Helix shift should be (+) relative to random coil"
-    assert (
-        shifts_beta[0] < rc_shifts[1]
-    ), "Beta shift should be (-) relative to random coil"
-    assert (
-        shifts_helix[0] > shifts_beta[0]
-    ), "Helix shift should be more positive than Beta"
+    assert shifts_helix[0] > rc_shifts[0], "Helix shift should be (+) relative to random coil"
+    assert shifts_beta[0] < rc_shifts[1], "Beta shift should be (-) relative to random coil"
+    assert shifts_helix[0] > shifts_beta[0], "Helix shift should be more positive than Beta"
 
 
 def test_saxs_debye_parity():
@@ -247,12 +237,12 @@ def test_synth_nmr_predictor_parity_2khd():
     # Both predictors must be physically reasonable (< 2 ppm vs BMRB).
     # The empirical floor for residue-agnostic offsets is ~0.4–1.0 ppm on
     # this helical target.
-    assert (
-        m["sn_csrmsd"] < 2.0
-    ), f"synth-nmr CSRMSD vs BMRB is unexpectedly large: {m['sn_csrmsd']:.4f} ppm"
-    assert (
-        m["tt_csrmsd"] < 2.0
-    ), f"TorsionTuner CSRMSD vs BMRB is unexpectedly large: {m['tt_csrmsd']:.4f} ppm"
+    assert m["sn_csrmsd"] < 2.0, (
+        f"synth-nmr CSRMSD vs BMRB is unexpectedly large: {m['sn_csrmsd']:.4f} ppm"
+    )
+    assert m["tt_csrmsd"] < 2.0, (
+        f"TorsionTuner CSRMSD vs BMRB is unexpectedly large: {m['tt_csrmsd']:.4f} ppm"
+    )
 
     # Both predictors share the same physical model, so they must agree closely
     # for a pure-helix target (< 1.5 ppm predictor-to-predictor).
@@ -302,12 +292,12 @@ def test_synth_nmr_predictor_parity_2rn7():
 
     # Both predictors must be within the expected accuracy range for a
     # mixed-SS protein with residue-agnostic offsets (empirical floor: 1–3 ppm).
-    assert (
-        m["sn_csrmsd"] < 3.0
-    ), f"synth-nmr CSRMSD vs BMRB is unexpectedly large: {m['sn_csrmsd']:.4f} ppm"
-    assert (
-        m["tt_csrmsd"] < 3.0
-    ), f"TorsionTuner CSRMSD vs BMRB is unexpectedly large: {m['tt_csrmsd']:.4f} ppm"
+    assert m["sn_csrmsd"] < 3.0, (
+        f"synth-nmr CSRMSD vs BMRB is unexpectedly large: {m['sn_csrmsd']:.4f} ppm"
+    )
+    assert m["tt_csrmsd"] < 3.0, (
+        f"TorsionTuner CSRMSD vs BMRB is unexpectedly large: {m['tt_csrmsd']:.4f} ppm"
+    )
 
     # For a mixed-SS protein, the two predictors may diverge more (up to 2 ppm)
     # due to helix/coil boundary disagreements between DSSP and Gaussian assignment.

@@ -27,9 +27,7 @@ def parse_psvs_summary(text: str) -> dict:
         "procheck_all": (
             r"PROCHECK\s*G-factor\s*\(all-atom\)\s*\(expected\s*>\s*-?[\d\.]+\):\s*(-?[\d\.]+)"
         ),
-        "clashscore": (
-            r"MolProbity\s*clashscore\s*\(expected\s*<\s*-?[\d\.]+\):\s*(-?[\d\.]+)"
-        ),
+        "clashscore": (r"MolProbity\s*clashscore\s*\(expected\s*<\s*-?[\d\.]+\):\s*(-?[\d\.]+)"),
     }
 
     for key, pattern in patterns.items():

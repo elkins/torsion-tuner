@@ -46,10 +46,8 @@ class Config:
     saxs_q_points: int = 50
 
 
-def train(config: Config | None = None):
+def train(config: Config | None = None) -> "FineTunerGNN":
     """
-    config = config if config is not None else Config()
-
     Execute the structural refinement training loop.
 
     This function loads a starting PDB, simulates experimental data (SAXS and NMR),
@@ -62,6 +60,8 @@ def train(config: Config | None = None):
     Returns:
         The trained FineTunerGNN model.
     """
+    if config is None:
+        config = Config()
     # 1. Load data
     data = load_pdb("test_helix.pdb")
     node_features, adj, edge_features = get_graph_features(data)
@@ -102,8 +102,8 @@ def train(config: Config | None = None):
     opt_state = optimizer.init(eqx.filter(model, eqx.is_array))
 
     # 4. Loss Function
-    def loss_fn(
-        model,
+    def loss_fn(  # type: ignore[no-untyped-def]
+        model: FineTunerGNN,
         node_features,
         adj,
         edge_features,
@@ -116,7 +116,7 @@ def train(config: Config | None = None):
         target_shifts,
         q_values,
         form_factors,
-    ):
+    ) -> jnp.ndarray:
         # Predict deltas
         deltas = model(node_features, adj, edge_features)
 
@@ -152,8 +152,8 @@ def train(config: Config | None = None):
         return total_loss
 
     @eqx.filter_jit
-    def make_step(
-        model,
+    def make_step(  # type: ignore[no-untyped-def]
+        model: FineTunerGNN,
         opt_state,
         node_features,
         adj,
@@ -167,7 +167,7 @@ def train(config: Config | None = None):
         target_shifts,
         q_values,
         form_factors,
-    ):
+    ) -> tuple[FineTunerGNN, object, jnp.ndarray]:
         loss, grads = eqx.filter_value_and_grad(loss_fn)(
             model,
             node_features,

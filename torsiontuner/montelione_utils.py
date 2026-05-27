@@ -8,13 +8,18 @@ from torsiontuner.data import RESIDUE_TYPES
 _RC_ARRAY = jnp.array([RANDOM_COIL_CA[res] for res in RESIDUE_TYPES])
 
 
-def get_residue_rc_shifts(res_indices):
+def get_residue_rc_shifts(res_indices: jnp.ndarray) -> jnp.ndarray:
     """Map residue indices to their random coil CA shifts."""
     # Use JAX indexing instead of list comprehension
     return _RC_ARRAY[res_indices]
 
 
-def montelione_loss(phi, psi, target_shifts, res_indices):
+def montelione_loss(
+    phi: jnp.ndarray,
+    psi: jnp.ndarray,
+    target_shifts: jnp.ndarray,
+    res_indices: jnp.ndarray,
+) -> jnp.ndarray:
     """
     A loss function inspired by the Montelione group's approach of
     validating structures against experimental chemical shifts.
@@ -26,7 +31,7 @@ def montelione_loss(phi, psi, target_shifts, res_indices):
     return jnp.mean((pred_shifts - target_shifts) ** 2)
 
 
-def ramachandran_penalty(phi, psi):
+def ramachandran_penalty(phi: jnp.ndarray, psi: jnp.ndarray) -> jnp.ndarray:
     """
     A soft Ramachandran-region penalty used as a backbone geometry regularizer.
 

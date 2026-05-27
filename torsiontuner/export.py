@@ -3,7 +3,7 @@ import biotite.structure.io.pdb as pdb
 import numpy as np
 
 
-def save_for_psvs(struct: stripe.AtomArray, file_path: str):
+def save_for_psvs(struct: stripe.AtomArray, file_path: str) -> None:
     """
     Save a protein structure to a PDB file specifically formatted for the
     PSVS validation server (http://psvs-1_5.nesg.org/).

@@ -16,7 +16,7 @@ class GNNLayer(eqx.Module):
     lin_edge: eqx.nn.Linear
     lin_out: eqx.nn.Linear
 
-    def __init__(self, node_dim, out_dim, key):
+    def __init__(self, node_dim: int, out_dim: int, key: jnp.ndarray) -> None:
         keys = jr.split(key, 3)
         self.lin_node = eqx.nn.Linear(node_dim, out_dim, key=keys[0])
         self.lin_edge = eqx.nn.Linear(1, out_dim, key=keys[1])  # 1D edge feature: distance
@@ -67,7 +67,7 @@ class FineTunerGNN(eqx.Module):
     layers: list
     output_head: eqx.nn.Linear
 
-    def __init__(self, node_dim, hidden_dim, out_dim, n_layers, key):
+    def __init__(self, node_dim: int, hidden_dim: int, out_dim: int, n_layers: int, key: jnp.ndarray) -> None:
         keys = jr.split(key, n_layers + 1)
         self.layers = []
         curr_dim = node_dim

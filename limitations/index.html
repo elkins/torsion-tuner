@@ -13,10 +13,6 @@
       
       
       
-        <link rel="prev" href="../getting-started/">
-      
-      
-        <link rel="next" href="../api/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>Architecture - TorsionTuner</title>
+        <title>Known Limitations - TorsionTuner</title>
       
     
     
@@ -80,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture-theory" class="md-skip">
+        <a href="#known-limitations" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Architecture
+              Known Limitations
             
           </span>
         </div>
@@ -251,11 +247,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link">
         
   
   
@@ -379,37 +373,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
         
   
   
@@ -425,126 +392,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#theoretical-foundations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔬 Theoretical Foundations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔬 Theoretical Foundations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-the-torsional-prediction-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. The Torsional Prediction Strategy
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-differentiable-kinematics-nerf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Differentiable Kinematics (NeRF)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-multi-objective-loss-function" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Multi-Objective Loss Function
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#software-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠 Software Architecture
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🏛 Research Integration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🏛 Research Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-chemical-shift-driven-refinement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Chemical Shift Driven Refinement
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-validation-with-rpf-dp-and-ansurr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Validation with RPF-DP and ANSURR
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -775,22 +622,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#theoretical-foundations" class="md-nav__link">
+  <a href="#scientific-limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔬 Theoretical Foundations
+        🧪 Scientific Limitations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔬 Theoretical Foundations">
+    <nav class="md-nav" aria-label="🧪 Scientific Limitations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-the-torsional-prediction-strategy" class="md-nav__link">
+  <a href="#1-chemical-shift-accuracy-floor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. The Torsional Prediction Strategy
+        1. Chemical Shift Accuracy Floor
       
     </span>
   </a>
@@ -798,10 +645,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-differentiable-kinematics-nerf" class="md-nav__link">
+  <a href="#2-saxs-valid-q-range" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Differentiable Kinematics (NeRF)
+        2. SAXS Valid \(q\)-Range
       
     </span>
   </a>
@@ -809,10 +656,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-multi-objective-loss-function" class="md-nav__link">
+  <a href="#3-backbone-only-representation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Multi-Objective Loss Function
+        3. Backbone-Only Representation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-peptide-bond-geometry-omega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Peptide Bond Geometry (\(\omega\))
       
     </span>
   </a>
@@ -825,33 +683,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#software-architecture" class="md-nav__link">
+  <a href="#computational-limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠 Software Architecture
+        💻 Computational Limitations
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🏛 Research Integration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🏛 Research Integration">
+    <nav class="md-nav" aria-label="💻 Computational Limitations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-chemical-shift-driven-refinement" class="md-nav__link">
+  <a href="#1-single-structure-refinement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Chemical Shift Driven Refinement
+        1. Single-Structure Refinement
       
     </span>
   </a>
@@ -859,10 +706,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-validation-with-rpf-dp-and-ansurr" class="md-nav__link">
+  <a href="#2-gradient-vanishing-in-high-quality-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Validation with RPF-DP and ANSURR
+        2. Gradient Vanishing in High-Quality Models
       
     </span>
   </a>
@@ -891,49 +738,33 @@
 
 
 
-<h1 id="architecture-theory">Architecture &amp; Theory</h1>
-<h2 id="theoretical-foundations">🔬 Theoretical Foundations</h2>
-<h3 id="1-the-torsional-prediction-strategy">1. The Torsional Prediction Strategy</h3>
-<p>Instead of predicting 3D coordinates (<span class="arithmatex">\(x, y, z\)</span>) directly—which can easily break chemical constraints like bond lengths—this model predicts <strong>torsional deltas</strong> (<span class="arithmatex">\(\Delta\phi, \Delta\psi\)</span>).
-*   <strong>Advantage:</strong> By keeping bond lengths and bond angles fixed to their idealized values, we ensure the resulting structure is always chemically valid.
-*   <strong>Input:</strong> Initial backbone angles from an AlphaFold PDB.
-*   <strong>Output:</strong> Small angular adjustments that "nudge" the protein into a conformation that fits the data.</p>
-<h3 id="2-differentiable-kinematics-nerf">2. Differentiable Kinematics (NeRF)</h3>
-<p>To calculate a loss against experimental data, we convert the predicted angles back into 3D coordinates using the <strong>Natural Extension Reference Frame (NeRF)</strong> algorithm, implemented in JAX.
-*   <strong>Forward Pass:</strong> Angles <span class="arithmatex">\(\rightarrow\)</span> 3D Coordinates <span class="arithmatex">\(\rightarrow\)</span> Simulated Observables (SAXS/NMR).
-*   <strong>Backward Pass:</strong> Gradients flow from the experimental loss back through the kinematics layer to the GNN weights.</p>
-<h3 id="3-multi-objective-loss-function">3. Multi-Objective Loss Function</h3>
-<p>The model optimizes a weighted combination of multiple experimental and structural constraints:
-$<span class="arithmatex">\(\mathcal{L}_{total} = w_{saxs}\mathcal{L}_{saxs} + w_{nmr}\mathcal{L}_{nmr} + w_{quality}\mathcal{L}_{quality} + w_{reg}\mathcal{L}_{reg}\)</span>$</p>
-<ul>
-<li><strong>SAXS Loss:</strong> Uses the Debye formula to fit Small-Angle X-ray Scattering profiles.</li>
-<li><strong>NMR Loss:</strong> Fits experimental <span class="arithmatex">\(C_\alpha\)</span> chemical shifts using a differentiable predictor.</li>
-<li><strong>Ramachandran Geometry Regularization:</strong> A soft potential penalizing phi/psi angles outside the favored regions of the Ramachandran plot (alpha-helix, beta-strand, left-handed alpha-helix). Analogous to the torsion-angle terms in CNS and Rosetta; similar in spirit to PROCHECK's G-factor.</li>
-<li><strong>Regularization:</strong> Prevents over-fitting by keeping the angular "nudges" small.</li>
-</ul>
+<h1 id="known-limitations">Known Limitations</h1>
+<p>TorsionTuner is designed for targeted backbone refinement. To ensure scientifically sound results, users should be aware of the following physical and implementation-defined limitations.</p>
 <hr />
-<h2 id="software-architecture">🛠 Software Architecture</h2>
-<p>The project is structured as a JAX-native pipeline, utilizing <strong>Equinox</strong> for the neural network architecture and <strong>Optax</strong> for optimization.</p>
-<ul>
-<li><strong><code>src/data.py</code></strong>: PDB loading and graph construction using <code>Biotite</code>. Handles the conversion of PDB coordinates into graph features (residue types, adjacency, and distances).</li>
-<li><strong><code>src/model.py</code></strong>: An Equinox GNN with message-passing layers. It utilizes both sequential and spatial adjacency to process the protein structure.</li>
-<li><strong><code>src/kinematics.py</code></strong>: The JAX-differentiable bridge between angles and 3D space. Implements the NeRF algorithm.</li>
-<li><strong><code>src/montelione_utils.py</code></strong>: Implementation of chemical shift losses and Ramachandran geometry regularization.</li>
-<li><strong><code>src/train.py</code></strong>: The orchestration layer. Defines the training loop, loss functions, and optimization step.</li>
-</ul>
+<h2 id="scientific-limitations">🧪 Scientific Limitations</h2>
+<h3 id="1-chemical-shift-accuracy-floor">1. Chemical Shift Accuracy Floor</h3>
+<p>The current chemical shift predictor uses <strong>residue-agnostic offsets</strong> (fixed <span class="arithmatex">\(\pm 3.1\)</span> ppm for <span class="arithmatex">\(\alpha\)</span>-helices and <span class="arithmatex">\(-1.5\)</span> ppm for <span class="arithmatex">\(\beta\)</span>-sheets).
+*   <strong>Impact:</strong> This results in an irreducible accuracy floor of approximately <strong>1.0–1.8 ppm CSRMSD</strong>.
+*   <strong>Note:</strong> While this is sufficient for identifying secondary structure improvements, it cannot match the precision of residue-specific predictors like SPARTA+ or SHIFTX2.</p>
+<h3 id="2-saxs-valid-q-range">2. SAXS Valid <span class="arithmatex">\(q\)</span>-Range</h3>
+<p>The implementation uses the <strong>Debye formula</strong> with <span class="arithmatex">\(q\)</span>-independent form factors (atomic numbers <span class="arithmatex">\(Z\)</span>).
+*   <strong>Constraint:</strong> The model is highly accurate for global shape and compaction at low scattering angles but diverges from reality at higher resolution.
+*   <strong>Recommendation:</strong> Limit scattering data analysis to <strong><span class="arithmatex">\(q &lt; 0.15 \text{Å}^{-1}\)</span></strong>. Above this range, solvent scattering and atomic-level hydration shells (not modeled here) become dominant.</p>
+<h3 id="3-backbone-only-representation">3. Backbone-Only Representation</h3>
+<p>TorsionTuner refines only the main-chain atoms (<span class="arithmatex">\(N, C_\alpha, C, O\)</span>).
+*   <strong>Impact:</strong> The model does not account for side-chain packing, rotamer favorability, or specific side-chain-to-side-chain interactions.
+*   <strong>Validation:</strong> Users should use external tools like <strong>MolProbity</strong> post-refinement to verify that backbone changes haven't introduced non-physical side-chain clashes.</p>
+<h3 id="4-peptide-bond-geometry-omega">4. Peptide Bond Geometry (<span class="arithmatex">\(\omega\)</span>)</h3>
+<p>The kinematics engine (NeRF) assumes a standard planar trans-peptide bond (<span class="arithmatex">\(\omega = 180^\circ\)</span>).
+*   <strong>Constraint:</strong> The model does not currently refine the <span class="arithmatex">\(\omega\)</span> angle. While this preserves physical planarity, it cannot model cis-proline bonds or significant peptide bond distortions unless they are present in the starting model and kept fixed.</p>
 <hr />
-<h2 id="research-integration">🏛 Research Integration</h2>
-<p>This project implements refinement strategies pioneered by the <strong>Montelione Group</strong> (RPI/Rutgers) for integrating AI-predicted structures with NMR data.</p>
-<h3 id="1-chemical-shift-driven-refinement">1. Chemical Shift Driven Refinement</h3>
-<p>Research shows that AlphaFold models often rival the accuracy of experimental NMR structures but can be further improved by fitting to backbone chemical shifts.
-*   <strong>Reference:</strong> <em>Tejero R, et al. (2022). "AlphaFold models of small proteins rival the accuracy of solution NMR structures." Frontiers in Molecular Biosciences.</em></p>
-<h3 id="2-validation-with-rpf-dp-and-ansurr">2. Validation with RPF-DP and ANSURR</h3>
-<p>The Montelione lab advocates for rigorous validation of refined models using "goodness-of-fit" metrics like RPF-DP and ANSURR.</p>
-<blockquote>
-<p><strong>Note on ANSURR:</strong> True ANSURR validation (Fowler, Sljoka &amp; Williamson, 2020, <em>Nature Commun.</em> 11:6321) compares per-residue NMR flexibility (RCI, derived from backbone chemical shifts) against structural rigidity computed by the FIRST graph-theoretic algorithm. TorsionTuner currently uses a <strong>Ramachandran geometry regularizer</strong> as a training-time backbone quality term; for post-refinement ANSURR validation, structures should be submitted to the ANSURR web server (ansurr.shef.ac.uk).
-*   <strong>Reference:</strong> <em>Huang YJ, et al. (2012). "RPF: a quality assessment tool for protein NMR structures." Nucleic Acids Research.</em>
-*   <strong>Reference:</strong> <em>Fowler NJ, et al. (2020). "A method for validating the accuracy of NMR protein structures." Nature Communications.</em></p>
-</blockquote>
+<h2 id="computational-limitations">💻 Computational Limitations</h2>
+<h3 id="1-single-structure-refinement">1. Single-Structure Refinement</h3>
+<p>The tool produces a single refined conformer rather than a structural ensemble.
+*   <strong>Context:</strong> NMR and SAXS data are inherently ensemble-averaged measurements. A single structure fitting the data perfectly may represent an over-fitted "mean" rather than a physically populated state.</p>
+<h3 id="2-gradient-vanishing-in-high-quality-models">2. Gradient Vanishing in High-Quality Models</h3>
+<p>If a starting AlphaFold model is already near-perfect (CSRMSD <span class="arithmatex">\(&lt; 0.5\)</span> ppm), the Gaussian soft-assignment for chemical shifts may produce very small gradients.
+*   <strong>Result:</strong> In these cases, the "Torsional Nudge" may be negligible, as the model is already at a local minimum of the loss function.</p>
 
 
 

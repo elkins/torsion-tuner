@@ -1022,7 +1022,7 @@ agree with established gold-standard software. They require no new
 experimental data — just pre-computed reference outputs.</p>
 <hr />
 <h4 id="11-chemical-shift-predictor-parity-completed-synth-nmr-reference">1.1 Chemical Shift Predictor Parity — <strong>✅ COMPLETED (synth-nmr reference)</strong></h4>
-<p><strong>What was done (2026-05-26):</strong><br />
+<p><strong>What was done (2026-05-26):</strong>
 Used <code>synth-nmr v0.11.0</code> as an independent reference predictor on the
 two NESG benchmark targets (2KHD, 2RN7). Both predictors use the same
 Wishart-1995 per-residue random-coil baseline and ±3.1/−1.5 ppm offsets
@@ -1074,45 +1074,45 @@ Wishart-1995 per-residue random-coil baseline and ±3.1/−1.5 ppm offsets
 - The ~1.8 ppm CSRMSD floor on 2RN7 identifies residue-agnostic ±3.1/−1.5 ppm
   offsets as the primary accuracy bottleneck. This also explains the gradient-
   vanishing problem in training (see 2RN7 benchmark redesign).</p>
-<p><strong>Remaining stretch goal — true SPARTA+ comparison:</strong><br />
+<p><strong>Remaining stretch goal — true SPARTA+ comparison:</strong>
 SPARTA+ (Bax lab) uses database mining to predict residue-specific offsets
 rather than a single mean. A comparison against SPARTA+ would quantify the
 additional approximation error from using residue-agnostic offsets and
 motivate the residue-specific lookup-table upgrade in §1.1a below.</p>
 <hr />
 <h4 id="11a-sparta-residue-specific-parity-stretch-goal">1.1a SPARTA+ Residue-Specific Parity (Stretch Goal)</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 For 3–5 proteins, compute Cα shifts with the Bax-lab SPARTA+ binary
 and compare to TorsionTuner's predictor. The key question: how much
 accuracy is lost by using the residue-agnostic ±3.1/−1.5 ppm offsets
 vs. per-residue SPARTA+ coefficients?</p>
-<p><strong>Success criterion:</strong><br />
+<p><strong>Success criterion:</strong>
 Quantify the SPARTA+–TorsionTuner gap (expected: 0.5–1.0 ppm additional
 RMSD). If the gap exceeds 1 ppm consistently, implement a residue-specific
 lookup table (20 × 2 matrix of helix/sheet offsets per residue type).</p>
 <p><strong>Tools needed:</strong> SPARTA+ binary (Bax lab, free)</p>
 <hr />
 <h4 id="12-saxs-parity-vs-crysol-or-foxs">1.2 SAXS Parity vs. CRYSOL or FoXS</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 Compute I(q) for a small test protein (e.g., ubiquitin, PDB 1UBQ) using
 both CRYSOL/FoXS and <code>debye_saxs</code>. Compare normalized profiles over
 q = 0.01–0.3 Å⁻¹. Write a pytest asserting χ² &lt; 0.05 for the normalized
 profiles at low q.</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 The Debye formula is correct, but the q-independent form factors (Z)
 diverge from reality above ~0.15 Å⁻¹. A parity test quantifies the
 q-range over which the approximation is valid, allowing documentation
 of safe operating bounds.</p>
-<p><strong>Success criterion:</strong><br />
+<p><strong>Success criterion:</strong>
 Agreement within 5% at q &lt; 0.15 Å⁻¹. Document the breakdown at higher q.</p>
 <p><strong>Tools needed:</strong> CRYSOL (ATSAS suite, free academic) or FoXS (web server)</p>
 <hr />
 <h4 id="13-omega-angle-integrity-check">1.3 Omega Angle Integrity Check</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 After refinement, assert that all ω (omega) dihedral angles remain
 within ±15° of 180° (trans) or ±15° of 0° (cis-Pro). Add this as a
 post-refinement assertion in both <code>train.py</code> and the benchmark tests.</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 The index mapping in <code>kinematics.py</code> assumes ω is never modified, but
 there is no enforcement. A distorted peptide bond would be unphysical
 and invisible to the current loss function.</p>
@@ -1120,12 +1120,12 @@ and invisible to the current loss function.</p>
 <hr />
 <h3 id="tier-2-nesg-benchmark-expansion-24-weeks">Tier 2: NESG Benchmark Expansion (~2–4 weeks)</h3>
 <h4 id="21-complete-all-9-li-et-al-2023-targets">2.1 Complete All 9 Li et al. 2023 Targets</h4>
-<p><strong>Current status:</strong> 2KHD ✅ (CSRMSD improvement demonstrated, BMRB 16238).<br />
+<p><strong>Current status:</strong> 2KHD ✅ (CSRMSD improvement demonstrated, BMRB 16238).
 2RN7 ✅ (BMRB 11017 corrected to 91 authentic shifts; benchmark redesigned as
-data-loading + convergence test — see note below).<br />
+data-loading + convergence test — see note below).
 <strong>Remaining:</strong> 2KIW, 2KZV, 2L9R, 2LCI, 2M5O, 2M2L, 2M5Q.
 (Verify exact list against Li et al. 2023 Table 1 first.)</p>
-<p><strong>Important note on 2RN7:</strong><br />
+<p><strong>Important note on 2RN7:</strong>
 The 2RN7 benchmark does <em>not</em> assert CSRMSD improvement. The Gaussian
 soft-assignment CS predictor has near-zero gradient at canonical
 helix/strand positions — exactly where a good AlphaFold model sits —
@@ -1141,19 +1141,19 @@ genuine CSRMSD improvement and remains the primary improvement claim.</p>
 3. Check initial CSRMSD — targets with &gt;1 ppm initial CSRMSD are better
    candidates for improvement (the Gaussian predictor has gradient signal)
 4. Run <code>test_2khd.py</code>-style benchmark; record initial and final CSRMSD</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 Two proteins is not a statistically meaningful sample. Nine proteins
 covering diverse folds (α, β, α/β) is the minimum for a credible claim.</p>
-<p><strong>Success criterion:</strong><br />
+<p><strong>Success criterion:</strong>
 Improvement in CSRMSD for ≥5/9 targets (acknowledging the gradient-
 vanishing limitation for high-quality AlphaFold models). Report mean ± SD
 reduction across targets where improvement is measurable.</p>
 <hr />
 <h4 id="22-whole-protein-csrmsd-not-just-subset">2.2 Whole-Protein CSRMSD (Not Just Subset)</h4>
-<p><strong>Current state:</strong><br />
+<p><strong>Current state:</strong>
 2KHD uses 17/108 residues; 2RN7 uses 91 residues (now corrected) but
 only those assigned in BMRB 11017.</p>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 Use the full BMRB chemical shift assignment for each target, not just
 a curated subset. Report CSRMSD separately for:
 - Residues with experimental data (observed CSRMSD)
@@ -1161,12 +1161,12 @@ a curated subset. Report CSRMSD separately for:
 - The full chain (predicted vs. expected using random-coil baseline)</p>
 <hr />
 <h4 id="23-statistical-significance-testing">2.3 Statistical Significance Testing</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 Run each benchmark 5 times with different random seeds. Report:
 - Mean CSRMSD improvement ± SD across seeds
 - A one-sided Wilcoxon signed-rank test (or t-test) for improvement
 - Whether results are consistent or seed-dependent</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 A single training run could get lucky. Showing consistent improvement
 across seeds is essential for credibility.</p>
 <hr />
@@ -1176,35 +1176,35 @@ is better by <em>external</em>, <em>independent</em> tools — not TorsionTuner'
 loss function.</p>
 <hr />
 <h4 id="31-real-procheck-molprobity-analysis">3.1 Real PROCHECK / MolProbity Analysis</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 For each benchmark target:
 1. Export initial AlphaFold model to PDB → run through MolProbity
 2. Export TorsionTuner-refined model → run through MolProbity
 3. Record Ramachandran favored %, clash score, rotamer outliers</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 The internal <code>ramachandran_penalty</code> is trained to minimize itself —
 showing external MolProbity also improves proves the penalty is
 physically meaningful, not just self-consistent.</p>
 <p><strong>Tools needed:</strong> MolProbity (web server or standalone)</p>
 <hr />
 <h4 id="32-real-psvs-submission-for-2khd-and-2rn7">3.2 Real PSVS Submission for 2KHD and 2RN7</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 Actually submit both AlphaFold start models and TorsionTuner-refined
 models to PSVS (http://psvs-1_5.nesg.org/). Save and commit the output
 reports. Write a real (non-mock) version of <code>test_psvs_improvement.py</code>
 that parses the real PSVS output files.</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 The current PSVS test uses entirely synthetic data. Real PSVS reports
 would be the first genuine external validation of structural quality
 improvement — directly comparable to what the Montelione group reports
 in published refinement papers.</p>
 <hr />
 <h4 id="33-ansurr-validation-post-hoc-external">3.3 ANSURR Validation (Post-Hoc, External)</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 Submit refined structures to the ANSURR web server (ansurr.shef.ac.uk)
 along with the corresponding BMRB chemical shifts. Record the
 correlation and RMSD scores before and after refinement.</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 ANSURR is the gold standard for NMR-specific structural accuracy as
 advocated by the Montelione group. Showing improvement on ANSURR — even
 as a post-hoc metric, not a training loss — would validate the entire
@@ -1213,22 +1213,22 @@ already in the bibliography.</p>
 <hr />
 <h3 id="tier-4-comparison-vs-established-tools-48-weeks">Tier 4: Comparison vs. Established Tools (~4–8 weeks)</h3>
 <h4 id="41-benchmark-vs-cns-xplor-nih-refinement">4.1 Benchmark vs. CNS / XPLOR-NIH Refinement</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 On the same 2–3 targets, run a standard CS-Rosetta or CNS chemical
 shift refinement protocol (or use the Montelione group's published
 protocol from Li et al. 2023). Compare final CSRMSD.</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 Without a comparison baseline, it is impossible to know whether
 TorsionTuner's improvements are competitive with existing methods.
 A head-to-head comparison is required for any publication.</p>
 <hr />
 <h4 id="42-round-trip-recovery-benchmark">4.2 Round-Trip Recovery Benchmark</h4>
-<p><strong>What to do:</strong><br />
+<p><strong>What to do:</strong>
 Take a high-quality NMR structure (one of the NESG targets).
 Perturb it with Gaussian noise on all ψ/φ angles (σ = 5°, 10°, 20°).
 Refine with TorsionTuner using the experimental shifts.
 Measure backbone RMSD to the true NMR structure after refinement.</p>
-<p><strong>Why it matters:</strong><br />
+<p><strong>Why it matters:</strong>
 Unlike the current test (which only measures CSRMSD improvement),
 this directly tests whether the model recovers physically correct
 3D geometry — the ultimate purpose of the tool.</p>

@@ -3,7 +3,7 @@
 ## 🔬 Theoretical Foundations
 
 ### 1. The Torsional Prediction Strategy
-Instead of predicting 3D coordinates ($x, y, z$) directly—which can easily break chemical constraints like bond lengths—this model predicts **torsional deltas** ($\Delta\phi, \Delta\psi$). 
+Instead of predicting 3D coordinates ($x, y, z$) directly—which can easily break chemical constraints like bond lengths—this model predicts **torsional deltas** ($\Delta\phi, \Delta\psi$).
 *   **Advantage:** By keeping bond lengths and bond angles fixed to their idealized values, we ensure the resulting structure is always chemically valid.
 *   **Input:** Initial backbone angles from an AlphaFold PDB.
 *   **Output:** Small angular adjustments that "nudge" the protein into a conformation that fits the data.

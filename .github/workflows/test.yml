@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: ["master", "main"]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: read
@@ -65,6 +63,10 @@ jobs:
                 fi
         pip install -e ".[dev]"
 
+      shell: bash
+
+    - name: Ensure Hugging Face cache directory exists
+      run: mkdir -p ~/.cache/huggingface
       shell: bash
 
     - name: Cache Hugging Face models

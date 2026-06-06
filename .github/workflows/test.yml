@@ -66,6 +66,15 @@ jobs:
         pip install -e ".[dev]"
 
       shell: bash
+
+    - name: Cache Hugging Face models
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/huggingface
+        key: ${{ runner.os }}-huggingface-${{ hashFiles('**/pyproject.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-huggingface-
+
     - name: Check typing with mypy
       run: |
         mypy torsiontuner/

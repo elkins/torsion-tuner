@@ -1,8 +1,6 @@
-# TorsionTuner
-
-[![codecov](https://codecov.io/gh/elkins/TorsionTuner/graph/badge.svg?token=YOUR_TOKEN)](https://codecov.io/gh/elkins/TorsionTuner)
 # 🧬 TorsionTuner: GNN-Based Protein Structure Refinement
 
+[![codecov](https://codecov.io/gh/elkins/TorsionTuner/graph/badge.svg)](https://codecov.io/gh/elkins/TorsionTuner)
 [![Tests](https://github.com/elkins/TorsionTuner/actions/workflows/test.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/test.yml)
 [![Lint](https://github.com/elkins/TorsionTuner/actions/workflows/lint.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/lint.yml)
 [![Docs](https://github.com/elkins/TorsionTuner/actions/workflows/docs.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/docs.yml)

@@ -59,6 +59,7 @@ jobs:
                 fi
         pip install -e ".[dev]"
 
+      shell: bash
     - name: Check typing with mypy
       run: |
         mypy torsiontuner/

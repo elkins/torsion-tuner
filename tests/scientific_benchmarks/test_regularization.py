@@ -1,3 +1,5 @@
+from typing import Any
+
 import equinox as eqx
 import jax.numpy as jnp
 import jax.random as jr
@@ -14,7 +16,7 @@ from torsiontuner.montelione_utils import (
 )
 
 
-def test_torsional_regularization_recovery():
+def test_torsional_regularization_recovery() -> None:
     """
     Scientific Validation (Item 3): Torsional Regularization.
     Prove that the model can recover from unphysical 'mangled' geometry
@@ -55,11 +57,11 @@ def test_torsional_regularization_recovery():
     key = jr.PRNGKey(42)
     model = FineTunerGNN(node_dim=20, hidden_dim=64, out_dim=2, n_layers=3, key=key)
 
-    optimizer = optax.adamw(learning_rate=5e-3)
+    optimizer = optax.adamw(learning_rate=1e-3)
     opt_state = optimizer.init(eqx.filter(model, eqx.is_array))
 
     # 5. Loss Function (Refinement)
-    def loss_fn(model):
+    def loss_fn(model: FineTunerGNN) -> jnp.ndarray:
         deltas = model(node_features, adj, edge_features)
         _, updated_dihedrals = rebuild_backbone(
             data["init_coords"],
@@ -80,7 +82,7 @@ def test_torsional_regularization_recovery():
         return 0.1 * nmr_loss + 10.0 * rama_loss + 0.001 * reg_loss
 
     @eqx.filter_jit
-    def make_step(model, opt_state):
+    def make_step(model: FineTunerGNN, opt_state: Any) -> tuple[FineTunerGNN, Any, jnp.ndarray]:
         loss, grads = eqx.filter_value_and_grad(loss_fn)(model)
         updates, opt_state = optimizer.update(grads, opt_state, model)
         model = eqx.apply_updates(model, updates)

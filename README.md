@@ -1,15 +1,15 @@
 # 🧬 TorsionTuner: GNN-Based Protein Structure Refinement
 
 [![codecov](https://codecov.io/gh/elkins/TorsionTuner/graph/badge.svg)](https://codecov.io/gh/elkins/TorsionTuner)
-[![Tests](https://github.com/elkins/TorsionTuner/actions/workflows/test.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/test.yml)
-[![Lint](https://github.com/elkins/TorsionTuner/actions/workflows/lint.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/lint.yml)
-[![Docs](https://github.com/elkins/TorsionTuner/actions/workflows/docs.yml/badge.svg)](https://github.com/elkins/TorsionTuner/actions/workflows/docs.yml)
+[![Tests](https://github.com/elkins/torsion-tuner/actions/workflows/test.yml/badge.svg)](https://github.com/elkins/torsion-tuner/actions/workflows/test.yml)
+[![Lint](https://github.com/elkins/torsion-tuner/actions/workflows/lint.yml/badge.svg)](https://github.com/elkins/torsion-tuner/actions/workflows/lint.yml)
+[![Docs](https://github.com/elkins/torsion-tuner/actions/workflows/docs.yml/badge.svg)](https://github.com/elkins/torsion-tuner/actions/workflows/docs.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Checked with mypy](https://img.shields.io/badge/type%20checked-mypy-blue)](https://mypy-lang.org/)
 
-**Documentation:** [https://elkins.github.io/TorsionTuner/](https://elkins.github.io/TorsionTuner/)
+**Documentation:** [https://elkins.github.io/torsion-tuner/](https://elkins.github.io/torsion-tuner/)
 
 ---
 
@@ -38,7 +38,7 @@ By operating exclusively in **torsional space** ($\phi/\psi$ angles), we ensure 
 
 ### 1. Installation
 ```bash
-git clone https://github.com/elkins/TorsionTuner.git
+git clone https://github.com/elkins/torsion-tuner.git
 cd TorsionTuner
 pip install -e .
 ```
@@ -103,7 +103,7 @@ This project implements refinement strategies for integrating AI-predicted struc
 
 We welcome contributions from both the Machine Learning and Structural Biology communities!
 *   **Bugs/Features:** Please open an issue.
-*   **Questions:** Visit our [Documentation](https://elkins.github.io/TorsionTuner/) or reach out via GitHub Discussions.
+*   **Questions:** Visit our [Documentation](https://elkins.github.io/torsion-tuner/) or reach out via GitHub Discussions.
 
 ---
 
@@ -131,7 +131,7 @@ TorsionTuner depends on and integrates with:
   author  = {Elkins, George},
   title   = {TorsionTuner: GNN-based protein structure refinement in torsional space},
   year    = {2024},
-  url     = {https://github.com/elkins/TorsionTuner},
+  url     = {https://github.com/elkins/torsion-tuner},
   version = {0.1.0}
 }
 ```

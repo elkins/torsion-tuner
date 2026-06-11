@@ -6,7 +6,7 @@
 Clone the repository and install in editable mode:
 
 ```bash
-git clone https://github.com/elkins/TorsionTuner.git
+git clone https://github.com/elkins/torsion-tuner.git
 cd TorsionTuner
 
 # Install core and dev dependencies

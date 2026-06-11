@@ -35,6 +35,50 @@ def test_load_pdb_stack(tmp_path: Any) -> None:
     assert data["coords"].shape == (3, 3)
 
 
+def test_load_pdb_missing_atoms(tmp_path: Any) -> None:
+    import biotite.structure as stripe
+    import biotite.structure.io.pdb as pdb
+
+    # Create a structure with 2 residues, but one is missing 'CA'
+    atom1 = stripe.Atom(coord=[0, 0, 0], res_id=1, res_name="ALA", atom_name="N", element="N")
+    atom2 = stripe.Atom(coord=[1, 1, 1], res_id=1, res_name="ALA", atom_name="C", element="C")
+
+    atom3 = stripe.Atom(coord=[2, 2, 2], res_id=2, res_name="GLY", atom_name="N", element="N")
+    atom4 = stripe.Atom(coord=[3, 3, 3], res_id=2, res_name="GLY", atom_name="CA", element="C")
+    atom5 = stripe.Atom(coord=[4, 4, 4], res_id=2, res_name="GLY", atom_name="C", element="C")
+
+    struct = stripe.array([atom1, atom2, atom3, atom4, atom5])
+
+    file_path = str(tmp_path / "missing.pdb")
+    pdb_file = pdb.PDBFile()
+    pdb_file.set_structure(struct)
+    pdb_file.write(file_path)
+
+    data = load_pdb(file_path)
+    # Only residue 2 should be loaded because residue 1 is missing CA
+    assert len(data["res_indices"]) == 1
+    assert data["coords"].shape == (3, 3)
+
+
+def test_load_pdb_unknown_residue(tmp_path: Any) -> None:
+    import biotite.structure as stripe
+    import biotite.structure.io.pdb as pdb
+
+    # UNK is not in RESIDUE_MAP, should default to index 0
+    atom1 = stripe.Atom(coord=[0, 0, 0], res_id=1, res_name="UNK", atom_name="N", element="N")
+    atom2 = stripe.Atom(coord=[1, 1, 1], res_id=1, res_name="UNK", atom_name="CA", element="C")
+    atom3 = stripe.Atom(coord=[2, 2, 2], res_id=1, res_name="UNK", atom_name="C", element="C")
+    struct = stripe.array([atom1, atom2, atom3])
+
+    file_path = str(tmp_path / "unknown.pdb")
+    pdb_file = pdb.PDBFile()
+    pdb_file.set_structure(struct)
+    pdb_file.write(file_path)
+
+    data = load_pdb(file_path)
+    assert data["res_indices"][0] == 0
+
+
 def test_graph_features() -> None:
     data = load_pdb("test_helix.pdb")
     node_features, adj, edge_features = get_graph_features(data)

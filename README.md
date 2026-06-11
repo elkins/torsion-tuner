@@ -54,6 +54,12 @@ python -m torsiontuner.train
 
 ---
 
+## 📚 Tutorials
+
+Experience **TorsionTuner** directly in your browser:
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elkins/TorsionTuner/blob/main/examples/multi_modal_refinement.ipynb) **Multi-Modal GNN Refinement** — Learn how to refine protein structures using GNNs against SAXS and NMR data.
+
 ## 🛠 Software Architecture
 
 The project is structured for transparency and modularity:

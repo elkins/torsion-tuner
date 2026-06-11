@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, cast
 
 import equinox as eqx
 import jax.numpy as jnp
@@ -57,7 +57,22 @@ def test_torsional_regularization_recovery() -> None:
     key = jr.PRNGKey(42)
     model = FineTunerGNN(node_dim=20, hidden_dim=64, out_dim=2, n_layers=3, key=key)
 
-    optimizer = optax.adamw(learning_rate=1e-3)
+    # Zero-initialize output head so the refinement starts from zero deltas
+    model = eqx.tree_at(
+        lambda m: m.output_head.weight,
+        model,
+        jnp.zeros_like(cast(jnp.ndarray, model.output_head.weight)),
+    )
+    model = eqx.tree_at(
+        lambda m: m.output_head.bias,
+        model,
+        jnp.zeros_like(cast(jnp.ndarray, model.output_head.bias)),
+    )
+
+    optimizer = optax.chain(
+        optax.clip_by_global_norm(1.0),
+        optax.adamw(learning_rate=1e-3),
+    )
     opt_state = optimizer.init(eqx.filter(model, eqx.is_array))
 
     # 5. Loss Function (Refinement)

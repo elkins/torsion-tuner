@@ -1,6 +1,6 @@
-# 🧬 TorsionTuner: GNN-Based Protein Structure Refinement
+# 🧬 Torsion-Tuner: GNN-Based Protein Structure Refinement
 
-[![codecov](https://codecov.io/gh/elkins/TorsionTuner/graph/badge.svg)](https://codecov.io/gh/elkins/TorsionTuner)
+[![codecov](https://codecov.io/gh/elkins/torsion-tuner/graph/badge.svg)](https://codecov.io/gh/elkins/torsion-tuner)
 [![Tests](https://github.com/elkins/torsion-tuner/actions/workflows/test.yml/badge.svg)](https://github.com/elkins/torsion-tuner/actions/workflows/test.yml)
 [![Lint](https://github.com/elkins/torsion-tuner/actions/workflows/lint.yml/badge.svg)](https://github.com/elkins/torsion-tuner/actions/workflows/lint.yml)
 [![Docs](https://github.com/elkins/torsion-tuner/actions/workflows/docs.yml/badge.svg)](https://github.com/elkins/torsion-tuner/actions/workflows/docs.yml)
@@ -13,14 +13,14 @@
 
 ---
 
-## 🌟 Why TorsionTuner?
+## 🌟 Why Torsion-Tuner?
 
-Static snapshots of proteins, such as those from AlphaFold, often miss the subtle dynamic nuances of molecules in their natural, solution-state environments.  **TorsionTuner** bridges this gap. It is a specialized machine learning engine that "nudges" idealized structures into better agreement with real-world experimental data.
+Static snapshots of proteins, such as those from AlphaFold, often miss the subtle dynamic nuances of molecules in their natural, solution-state environments.  **Torsion-Tuner** bridges this gap. It is a specialized machine learning engine that "nudges" idealized structures into better agreement with real-world experimental data.
 
 ### The Problem
 Traditional refinement often breaks the laws of chemistry -— bond lengths stretch and angles distort -— just to fit noisy data.
 
-### The TorsionTuner Solution
+### The Torsion-Tuner Solution
 By operating exclusively in **torsional space** ($\phi/\psi$ angles), we ensure the laws of physics are respected. Our differentiable kinematics layer allows gradients to flow from the experimental loss (SAXS/NMR) directly back into the GNN weights, creating a chemically valid, evidence-based refinement.
 
 ---
@@ -39,7 +39,7 @@ By operating exclusively in **torsional space** ($\phi/\psi$ angles), we ensure 
 ### 1. Installation
 ```bash
 git clone https://github.com/elkins/torsion-tuner.git
-cd TorsionTuner
+cd torsion-tuner
 pip install -e .
 ```
 
@@ -56,9 +56,9 @@ python -m torsiontuner.train
 
 ## 📚 Tutorials
 
-Experience **TorsionTuner** directly in your browser:
+Experience **Torsion-Tuner** directly in your browser:
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elkins/TorsionTuner/blob/master/examples/interactive_tutorials/multi_modal_refinement.ipynb) **Multi-Modal GNN Refinement** — Learn how to refine protein structures using GNNs against SAXS and NMR data.
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elkins/torsion-tuner/blob/master/examples/interactive_tutorials/multi_modal_refinement.ipynb) **Multi-Modal GNN Refinement** — Learn how to refine protein structures using GNNs against SAXS and NMR data.
 
 ## 🛠 Software Architecture
 
@@ -114,7 +114,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Related Projects
 
-TorsionTuner depends on and integrates with:
+Torsion-Tuner depends on and integrates with:
 
 - [diff-biophys](https://github.com/elkins/diff-biophys) — JAX differentiable kernels for SAXS and NMR losses
 - [synth-pdb](https://github.com/elkins/synth-pdb) — Synthetic PDB generation for training and validation
@@ -129,7 +129,7 @@ TorsionTuner depends on and integrates with:
 ```bibtex
 @software{torsiontuner,
   author  = {Elkins, George},
-  title   = {TorsionTuner: GNN-based protein structure refinement in torsional space},
+  title   = {Torsion-Tuner: GNN-based protein structure refinement in torsional space},
   year    = {2024},
   url     = {https://github.com/elkins/torsion-tuner},
   version = {0.1.0}

@@ -9,7 +9,7 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Checked with mypy](https://img.shields.io/badge/type%20checked-mypy-blue)](https://mypy-lang.org/)
 
-**Documentation:** [https://elkins.github.io/torsion-tuner/](https://elkins.github.io/torsion-tuner/)
+**Documentation:** [https://elkins-lab.github.io/torsion-tuner/](https://elkins-lab.github.io/torsion-tuner/)
 
 ---
 
@@ -103,7 +103,7 @@ This project implements refinement strategies for integrating AI-predicted struc
 
 We welcome contributions from both the Machine Learning and Structural Biology communities!
 *   **Bugs/Features:** Please open an issue.
-*   **Questions:** Visit our [Documentation](https://elkins.github.io/torsion-tuner/) or reach out via GitHub Discussions.
+*   **Questions:** Visit our [Documentation](https://elkins-lab.github.io/torsion-tuner/) or reach out via GitHub Discussions.
 
 ---
 
